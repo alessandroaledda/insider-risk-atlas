@@ -21,7 +21,7 @@ It keeps the cells that apply to it, adds its own scenarios, and marks on its co
 
 ## Versions
 
-Version 0.5, October 2026. The mapping follows the Insider Threat Matrix™ version named in the map; a new version of the Matrix re-runs the coverage table.
+Version 0.5, October 2026. The mapping follows the Insider Threat Matrix™ version named in the map; a new version of the Matrix requires the coverage table to be reviewed.
 
 ## Licence and attribution
 
