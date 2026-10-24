@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insider Risk Map</title>
+<meta name="description" content="An organizational layer for the Insider Threat Matrix: insider risk scenarios by what is done to which asset, and by who has the access, with signals, controls, ITM entries and reporting obligations.">
+<style>
+@font-face{font-family:"Source Serif 4";font-weight:400;font-style:normal;src:url("fonts/SourceSerif4-400-normal-latin.woff2") format("woff2")}
+@font-face{font-family:"Source Serif 4";font-weight:600;font-style:normal;src:url("fonts/SourceSerif4-600-normal-latin.woff2") format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:400;font-style:normal;src:url("fonts/JetBrainsMono-400-normal-latin.woff2") format("woff2")}
+:root{--ink:#16202B;--ink2:#1C2733;--ink3:#243040;--paper:#F7F7F4;--paper2:rgba(247,247,244,.72);--paper3:rgba(247,247,244,.46);--acc:#A47A46;--acc2:#C49A63;--line:rgba(247,247,244,.14);--line2:rgba(247,247,244,.26);--cell:rgba(247,247,244,.07);--cellh:rgba(247,247,244,.13)}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ink);color:var(--paper);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;font-size:17px;line-height:1.5}
+a{color:var(--acc2)}
+.wrap{max-width:1320px;margin:0 auto;padding:44px 36px 70px}
+.eyebrow{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc2);margin:0 0 12px}
+h1{font-size:46px;line-height:1.05;font-weight:400;margin:0 0 10px;letter-spacing:-.01em}
+.sub{font-size:21px;line-height:1.35;margin:0 0 14px;max-width:900px;color:var(--paper)}
+.lead{max-width:900px;margin:0 0 30px;color:var(--paper2);font-size:16.5px}
+
+.map{display:grid;grid-template-columns:260px repeat(8,minmax(0,1fr));gap:8px;align-items:stretch}
+.map .corner{display:flex;align-items:flex-end;padding:0 0 10px 2px}
+.map .corner span{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--paper3)}
+.map .col{display:flex;flex-direction:column;justify-content:flex-end;padding:0 4px 10px;text-align:center}
+.map .col b{display:block;font-weight:600;font-size:14px;line-height:1.2;color:var(--paper)}
+.map .col small{display:block;font-size:11.5px;color:var(--paper3);line-height:1.3;margin-top:4px}
+.map .row{padding:12px 14px 10px 2px;border-top:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}
+.map .row b{font-weight:600;font-size:17px;line-height:1.2;color:var(--paper)}
+.map .row span{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc2);margin-top:5px}
+.map .row small{display:block;font-size:12.5px;color:var(--paper3);line-height:1.35;margin-top:5px}
+.cell{position:relative;min-height:84px;border:1px solid var(--line);background:transparent;border-radius:2px}
+.cell.has{background:var(--cell);border-color:transparent;cursor:pointer;transition:background .15s ease}
+.cell.has:hover,.cell.has:focus-visible{background:var(--cellh);outline:0}
+.cell.has.on{background:var(--acc);border-color:var(--acc)}
+.cell.has.on .k,.cell.has.on .n{color:var(--ink)}
+.cell.has.on .d i{background:var(--ink)}
+.cell.has.on .d i.neg{background:transparent;border-color:var(--ink)}
+.cell .k{position:absolute;left:10px;right:10px;top:9px;font-size:12.5px;line-height:1.3;color:var(--paper2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.cell .n{position:absolute;right:9px;bottom:6px;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;color:var(--paper3)}
+.cell .d{position:absolute;left:10px;bottom:10px;display:flex;gap:4px}
+.cell .d i{display:block;width:7px;height:7px;border-radius:50%;background:var(--acc2)}
+.cell .d i.neg{background:transparent;border:1px solid var(--acc2)}
+.legend{display:flex;flex-wrap:wrap;gap:22px;margin:18px 0 0;font-size:13.5px;color:var(--paper2)}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--acc2);margin-right:7px;vertical-align:middle}
+.legend i.neg{background:transparent;border:1px solid var(--acc2)}
+.legend b{display:inline-block;width:14px;height:14px;background:var(--cell);vertical-align:middle;margin-right:7px;border-radius:2px}
+.legend b.on{background:var(--acc)}
+
+.drawer{margin-top:34px;border-top:1px solid var(--line2);padding-top:26px;display:none}
+.drawer.open{display:block}
+.drawer .where{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 18px;margin:0 0 18px}
+.drawer .where h2{font-size:26px;font-weight:400;margin:0}
+.drawer .where span{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc2)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(520px,1fr));gap:16px}
+.card{background:var(--ink2);border:1px solid var(--line);padding:22px 24px 20px;border-radius:2px}
+.card .tag{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc2);margin:0 0 10px}
+.card h3{font-size:20px;font-weight:600;line-height:1.3;margin:0 0 14px}
+.card dl{margin:0}
+.card dt{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper3);margin-top:14px}
+.card dd{margin:4px 0 0;font-size:15.5px;color:var(--paper2);line-height:1.5}
+.card .chain{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+.card .chain div{background:var(--ink3);padding:10px 12px;font-size:14px;line-height:1.4;color:var(--paper2);border-radius:2px}
+.card .chain b{display:block;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc2);margin-bottom:5px;font-weight:400}
+.card .itm a{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:13px;text-decoration:none;border-bottom:1px solid rgba(196,154,99,.5)}
+.card .itm a:hover{border-bottom-color:var(--acc2)}
+.card .cnt{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10.5px;color:var(--paper3);letter-spacing:.04em}
+.read details{margin-top:6px}.read details p{margin:8px 0 0;font-size:14.5px}
+
+.read{max-width:900px;margin:56px 0 0;border-top:1px solid var(--line2);padding-top:26px}
+.read h2{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:400;color:var(--acc2);margin:0 0 12px}
+.read p{margin:0 0 12px;color:var(--paper2);font-size:15.5px}
+.read p b{color:var(--paper);font-weight:600}
+footer{margin-top:44px;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--paper3)}
+
+@media (max-width:1100px){.map{grid-template-columns:200px repeat(8,minmax(0,1fr))}.cell .k{display:none}.cell{min-height:64px}}
+@media (max-width:820px){.wrap{padding:28px 16px 48px}h1{font-size:34px}.sub{font-size:18px}.mapwrap{overflow-x:auto;margin:0 -16px;padding:0 16px}.map{min-width:860px}.cards{grid-template-columns:1fr}.card .chain{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="eyebrow">Insider risk management</p>
+<h1>Insider Risk Map</h1>
+<p class="sub">An organizational layer for the Insider Threat Matrix&trade;: what is done to which asset, by who has the access.</p>
+<p class="lead">The Insider Threat Matrix&trade; classifies what an insider does, by technique. A program has to answer two questions before it can choose its use cases and write its agreements: who, in this organization, has the access, and which asset the act reaches. The rows combine the act with the asset; the columns are populations defined by what their access reaches. Select a cell: the scenarios open below, each with its signals, the chain of controls that answers it, its Insider Threat Matrix&trade; entries, and the reporting duty that follows from the asset.</p>
+
+<div class="mapwrap"><div class="map" id="map" role="grid" aria-label="Acts on assets, by access population"></div></div>
+<div class="legend">
+  <span><b></b>Scenarios in the cell</span>
+  <span><b class="on"></b>Selected</span>
+  <span><i></i>Deliberate</span>
+  <span><i class="neg"></i>Negligent</span>
+</div>
+
+<section class="drawer" id="drawer" aria-live="polite"></section>
+
+<section class="read">
+  <h2>How to read it</h2>
+  <p><b>The rows are the act and the asset together.</b> A motive does not change what is observed or what follows: the client list leaves the organization the same way whether it is sold, carried to the next job, or printed to be worked on at home. The act and the asset do change both: data leaving is seen on its movement and answered with evidence of what left; a system damaged is seen on changes and answered with a restore; money diverted is seen in the business application and answered with a hold; a person harmed is seen on access to records and answered through the Data Protection Officer. Intent, deliberate or negligent, is a property of the scenario: the same alert, a different consequence and a different lever.</p>
+  <p><b>The columns are populations defined by what their access reaches</b>, not by the department's name, so that the same map fits a bank, a utility or a manufacturer. An organization maps its own roles onto them.</p>
+  <p><b>The Insider Threat Matrix&trade; entries carry the techniques.</b> Each scenario points to the ITM motives, means and infringements that describe it, down to the channel; the map adds no technique of its own. Detections and preventions per technique are the Matrix's; the scenario is where an organization decides which of them it needs.</p>
+  <p><b>Out of scope by definition:</b> an external attacker using a stolen identity, which is the work of security operations. A colleague using another colleague's identity is inside the map: the act is theirs, the identity is the channel.</p>
+  <p><b>What an organization adds on its copy:</b> which scenarios apply and which it has seen; for each, whether the act is visible and whether the asset is recognized; the lever chosen: governance, technical, awareness, or the hand-over to another function. The map does not measure anyone's coverage; the copy does.</p>
+</section>
+
+<section class="read">
+  <h2>Coverage of the Insider Threat Matrix&trade; infringements, version 2.13.0</h2>
+  <p>Where each of the 45 Infringement sections of the Matrix sits on this map, and the 14 the map excludes and why. The mapping is pinned to this version of the Matrix; a new version re-runs the table.</p>
+  <details><summary style="cursor:pointer;color:var(--acc2);font-size:15px">Placed, by row</summary><p><b>Exfiltration · personal data</b>: <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF001" target="_blank" rel="noopener">IF001</a> Exfiltration via Web Service, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF002" target="_blank" rel="noopener">IF002</a> Exfiltration via Physical Medium, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF003" target="_blank" rel="noopener">IF003</a> Exfiltration via Media Capture, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF004" target="_blank" rel="noopener">IF004</a> Exfiltration via Other Network Medium, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF005" target="_blank" rel="noopener">IF005</a> Exfiltration via Messaging Applications, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF006" target="_blank" rel="noopener">IF006</a> Unauthorized Printing of Documents, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF010" target="_blank" rel="noopener">IF010</a> Exfiltration via Email, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF018" target="_blank" rel="noopener">IF018</a> Sharing on AI Chatbot Platforms, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF022" target="_blank" rel="noopener">IF022</a> Data Loss, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF024" target="_blank" rel="noopener">IF024</a> Exfiltration via Screen Sharing, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF027" target="_blank" rel="noopener">IF027</a> Installing Malicious Software, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF028" target="_blank" rel="noopener">IF028</a> Delegated Execution via Artificial Intelligence Agents, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF030" target="_blank" rel="noopener">IF030</a> Exfiltration via SMS/MMS, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF034" target="_blank" rel="noopener">IF034</a> Exfiltration via Automated Transcription.</p><p><b>Exfiltration · business information</b>: <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF001" target="_blank" rel="noopener">IF001</a> Exfiltration via Web Service, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF002" target="_blank" rel="noopener">IF002</a> Exfiltration via Physical Medium, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF003" target="_blank" rel="noopener">IF003</a> Exfiltration via Media Capture, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF004" target="_blank" rel="noopener">IF004</a> Exfiltration via Other Network Medium, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF005" target="_blank" rel="noopener">IF005</a> Exfiltration via Messaging Applications, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF006" target="_blank" rel="noopener">IF006</a> Unauthorized Printing of Documents, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF010" target="_blank" rel="noopener">IF010</a> Exfiltration via Email, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF011" target="_blank" rel="noopener">IF011</a> Providing Access to a Unauthorized Third Party, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF016" target="_blank" rel="noopener">IF016</a> Misappropriation of Funds, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF018" target="_blank" rel="noopener">IF018</a> Sharing on AI Chatbot Platforms, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF022" target="_blank" rel="noopener">IF022</a> Data Loss, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF024" target="_blank" rel="noopener">IF024</a> Exfiltration via Screen Sharing, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF028" target="_blank" rel="noopener">IF028</a> Delegated Execution via Artificial Intelligence Agents, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF030" target="_blank" rel="noopener">IF030</a> Exfiltration via SMS/MMS, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF032" target="_blank" rel="noopener">IF032</a> External Credential Sharing, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF034" target="_blank" rel="noopener">IF034</a> Exfiltration via Automated Transcription, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF045" target="_blank" rel="noopener">IF045</a> Unauthorized Data Access.</p><p><b>Sabotage · systems and operations</b>: <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF011" target="_blank" rel="noopener">IF011</a> Providing Access to a Unauthorized Third Party, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF013" target="_blank" rel="noopener">IF013</a> Disruption of Business Operations, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF014" target="_blank" rel="noopener">IF014</a> Unauthorized Changes to IT Systems, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF022" target="_blank" rel="noopener">IF022</a> Data Loss, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF026" target="_blank" rel="noopener">IF026</a> Denial of Service, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF027" target="_blank" rel="noopener">IF027</a> Installing Malicious Software, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF028" target="_blank" rel="noopener">IF028</a> Delegated Execution via Artificial Intelligence Agents, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF029" target="_blank" rel="noopener">IF029</a> Codebase Integrity Compromise, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF032" target="_blank" rel="noopener">IF032</a> External Credential Sharing, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF033" target="_blank" rel="noopener">IF033</a> Digital Defacement, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF037" target="_blank" rel="noopener">IF037</a> Physical Sabotage, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF042" target="_blank" rel="noopener">IF042</a> Deliberate Safety Control Defeat.</p><p><b>Sabotage · data integrity</b>: <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF040" target="_blank" rel="noopener">IF040</a> Data Integrity Manipulation.</p><p><b>Fraud · money and physical assets</b>: <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF015" target="_blank" rel="noopener">IF015</a> Theft, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF016" target="_blank" rel="noopener">IF016</a> Misappropriation of Funds, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF043" target="_blank" rel="noopener">IF043</a> Organizational Resource Diversion, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF044" target="_blank" rel="noopener">IF044</a> Abuse of Decision-Making Authority.</p><p><b>Misconduct towards people</b>: <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF021" target="_blank" rel="noopener">IF021</a> Harassment and Discrimination, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF028" target="_blank" rel="noopener">IF028</a> Delegated Execution via Artificial Intelligence Agents, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF036" target="_blank" rel="noopener">IF036</a> Misuse of Corporate Communication Channels, <a href="https://insiderthreatmatrix.org/articles/AR4/sections/IF045" target="_blank" rel="noopener">IF045</a> Unauthorized Data Access.</p></details>
+  <details><summary style="cursor:pointer;color:var(--acc2);font-size:15px;margin-top:8px">Excluded, with the reason</summary><p><b>IF007 Unlawfully Accessing Copyrighted Material</b>: Conduct towards third parties' rights, not an act on the organization's assets; acceptable-use matter.</p><p><b>IF008 Inappropriate Web Browsing</b>: Conduct; the monitoring of browsing content is restricted under European employment law and is not a program measure.</p><p><b>IF009 Installing Unapproved Software</b>: Endpoint hygiene, handled by security operations; appears in scenarios as a means, not as the act.</p><p><b>IF012 Public Statements Resulting in Brand Damage</b>: Communications and reputation; not an act on an information asset; the communications and HR functions.</p><p><b>IF017 Excessive Personal Use</b>: Conduct; a program measure here would fail the proportionality test in every European jurisdiction.</p><p><b>IF019 Non-Corporate Device</b>: A means (the device), not an act; appears in scenarios as the channel.</p><p><b>IF020 Unauthorized VPN Client</b>: A means; network hygiene, handled by security operations.</p><p><b>IF023 Regulatory Non-Compliance</b>: Export, sanctions and competition law: the trade compliance function's domain; an interface, not a program measure.</p><p><b>IF025 Internal Credential Sharing</b>: A means: the colleague's identity as the channel; the act performed with it sits in its own row.</p><p><b>IF031 Unauthorized Presence in Restricted Physical Areas</b>: Physical security's domain; a preparation for sabotage or theft, handled at the interface with corporate security.</p><p><b>IF035 Unauthorized Work Location</b>: Conduct and compliance (tax, immigration, data residency); location monitoring is restricted and is not a program measure.</p><p><b>IF038 Undisclosed Concurrent Employment</b>: Conflict of interest and conduct; the HR and compliance functions.</p><p><b>IF039 Unauthorized Account Access</b>: A means: access to another account; the act performed with it sits in its own row.</p><p><b>IF041 Unauthorized Organizational Representation</b>: Conduct and legal exposure; where a contract or payment follows, the fraud row applies.</p><p>Means, motives, preparation and anti-forensics are properties of a scenario and are cited inside the scenarios, not placed on the grid.</p></details>
+</section>
+<section class="read" style="margin-top:28px">
+  <h2>Attribution and licence</h2>
+  <p>Mapping to Insider Threat Matrix&trade; entries, version <span id="itmv"></span>. Insider Threat Matrix&trade; is a trademark of Forscie Limited; the framework is published under the Apache License 2.0 at insiderthreatmatrix.org. This map is an independent work and is not sponsored, endorsed by, or affiliated with Forscie Limited.</p>
+  <p>Insider Risk Map &copy; Alessandro Aledda, licensed under CC BY 4.0: use it, adapt it, build on it, with attribution. Reporting obligations by asset follow Insider Threat Event Requirements (ITER&trade;), alessandroaledda.com/iter/.</p>
+</section>
+<footer>Alessandro Aledda &nbsp;|&nbsp; Insider Risk Consultant &nbsp;|&nbsp; Insider Risk Map, version 0.3, October 2026</footer>
+</div>
+
+<script>
+const ITM_VERSION="2.13.0";
+const ROWS=[
+ {id:"exf-personal",act:"Exfiltration",asset:"Personal data",def:"Data about customers or employees leaves the organization's control"},
+ {id:"exf-business",act:"Exfiltration",asset:"Business information",def:"Secrets, intellectual property or inside information leave the organization's control"},
+ {id:"sab-systems",act:"Sabotage",asset:"Systems and operations",def:"Systems, processes or operations are disrupted or destroyed"},
+ {id:"sab-data",act:"Sabotage",asset:"Data integrity",def:"Records, datasets or models are altered so that decisions rest on false data"},
+ {id:"fra-money",act:"Fraud",asset:"Money and physical assets",def:"Funds, goods or value are diverted through a process or an authority"},
+ {id:"mis-personal",act:"Misconduct towards people",asset:"Personal data",def:"A person's data or standing is accessed or harmed without a business reason"}
+];
+const POPS=[
+ {id:"cus",name:"Customer-facing",def:"Customer data, accounts, relationships"},
+ {id:"ops",name:"Operations",def:"Processes, payments, orders, plants, logistics"},
+ {id:"tech",name:"Technology",def:"Systems, identities, configurations, source code"},
+ {id:"data",name:"Data and analytics",def:"Datasets, models and reports in bulk"},
+ {id:"exec",name:"Management",def:"Strategy, prices, decisions, inside information"},
+ {id:"peo",name:"People functions",def:"Employee data, pay, performance, investigations"},
+ {id:"third",name:"Third parties",def:"Contractor and supplier access, guest identities"},
+ {id:"nhi",name:"Non-human identities",def:"Service accounts, agents and automations under their own identity"}
+];
+const OBL={"Personal data":"GDPR articles 33 and 34: breach assessment, notification to the authority within 72 hours where there is a risk, communication to the people where the risk is high; ITER types T1, T3 and T4","Business information":"No reporting duty of its own; for a listed issuer, Market Abuse Regulation article 17 and the insider list where the information is inside information","Systems and operations":"NIS2 article 23 and DORA article 19 where the organization is in scope: early warning within 24 hours, notification within 72; ITER type T2","Data integrity":"GDPR articles 33 and 34 where personal data is altered; NIS2 and DORA where the integrity of a service is affected","Money and physical assets":"No reporting duty of its own; the criminal complaint and the insurer; DORA where payment systems are touched"};
+const ITMN={"MT003": {"t": "Leaver", "dt": 4, "pv": 6}, "MT005": {"t": "Personal Gain", "dt": 1, "pv": 1}, "MT006": {"t": "Third Party Collusion Motivated by Personal Gain", "dt": 7, "pv": 6}, "MT008": {"t": "Lack of Awareness", "dt": 3, "pv": 7}, "MT016": {"t": "Human Error", "dt": 2, "pv": 8}, "MT018": {"t": "Curiosity", "dt": 3, "pv": 5}, "MT021": {"t": "Conflicts of Interest", "dt": 6, "pv": 12}, "MT023": {"t": "Revenge", "dt": 6, "pv": 8}, "ME007": {"t": "Privileged Access", "dt": 5, "pv": 3}, "ME021": {"t": "Unrevoked Access", "dt": 0, "pv": 2}, "ME030": {"t": "Enterprise-Integrated AI Platforms", "dt": 8, "pv": 10}, "PR042": {"t": "Account Creation", "dt": 4, "pv": 3}, "IF001.001": {"t": "Exfiltration via Cloud Storage", "dt": 5, "pv": 4}, "IF001.002": {"t": "Exfiltration via Code Repository", "dt": 6, "pv": 4}, "IF001.006": {"t": "Exfiltration via Generative AI Platform", "dt": 8, "pv": 9}, "IF001.007": {"t": "Exfiltration via Collaboration Platform", "dt": 10, "pv": 3}, "IF002.001": {"t": "Exfiltration via USB Mass Storage Device", "dt": 10, "pv": 3}, "IF004.008": {"t": "Exfiltration via API", "dt": 4, "pv": 0}, "IF006.002": {"t": "Printing of Documents with Work Printer", "dt": 4, "pv": 3}, "IF010.002": {"t": "Exfiltration via Personal Email", "dt": 12, "pv": 3}, "IF011.001": {"t": "Intentionally Weakening Network Security Controls For a Third Party", "dt": 8, "pv": 3}, "IF011.003": {"t": "Providing Unauthorized Access to a Collaboration Platform", "dt": 7, "pv": 2}, "IF013.001": {"t": "File or Data Deletion", "dt": 7, "pv": 7}, "IF013.002": {"t": "Operational Disruption Impacting Customers", "dt": 15, "pv": 12}, "IF014": {"t": "Unauthorized Changes to IT Systems", "dt": 0, "pv": 0}, "IF014.004": {"t": "Modification of Access Controls", "dt": 1, "pv": 2}, "IF014.005": {"t": "Deletion of Cloud Resources", "dt": 3, "pv": 3}, "IF016.002": {"t": "Unauthorized Bank Transfers", "dt": 5, "pv": 8}, "IF016.004": {"t": "Insider Trading", "dt": 5, "pv": 7}, "IF016.005": {"t": "Modification of Invoices", "dt": 1, "pv": 8}, "IF016.006": {"t": "Creation of Fictitious Invoices", "dt": 1, "pv": 8}, "IF016.009": {"t": "Creation of Fictitious Work Orders", "dt": 4, "pv": 2}, "IF016.013": {"t": "Expense Reimbursement Fraud", "dt": 6, "pv": 4}, "IF021": {"t": "Harassment and Discrimination", "dt": 6, "pv": 3}, "IF022.001": {"t": "Intellectual Property Theft", "dt": 6, "pv": 6}, "IF022.002": {"t": "PII Leakage (Personally Identifiable Information)", "dt": 5, "pv": 12}, "IF022.005": {"t": "Media Leak", "dt": 7, "pv": 10}, "IF027.005": {"t": "Destructive Malware Deployment", "dt": 24, "pv": 8}, "IF028": {"t": "Delegated Execution via Artificial Intelligence Agents", "dt": 6, "pv": 4}, "IF028.001": {"t": "AI Agent Internal Reconnaissance", "dt": 8, "pv": 9}, "IF028.002": {"t": "AI Agent Privilege Exploitation", "dt": 5, "pv": 7}, "IF029.001": {"t": "Malicious or Harmful Code Contribution", "dt": 0, "pv": 0}, "IF037": {"t": "Physical Sabotage", "dt": 1, "pv": 1}, "IF039.002": {"t": "Access to a Retained Former Account", "dt": 5, "pv": 2}, "IF039.004": {"t": "Illicit Access to a Privileged Account", "dt": 5, "pv": 3}, "IF040.001": {"t": "Stored Record Manipulation", "dt": 9, "pv": 6}, "IF042": {"t": "Deliberate Safety Control Defeat", "dt": 4, "pv": 0}, "IF043.001": {"t": "Personnel Diversion", "dt": 2, "pv": 3}, "IF043.005": {"t": "Working-Time Diversion", "dt": 8, "pv": 4}, "IF044.001": {"t": "Unauthorized Approval", "dt": 6, "pv": 4}, "IF044.003": {"t": "Improper Preferential Treatment", "dt": 8, "pv": 3}, "IF045.001": {"t": "Unauthorized Access to Customer Data", "dt": 10, "pv": 5}, "IF045.002": {"t": "Unauthorized Access to Workforce Data", "dt": 9, "pv": 5}, "IF045.003": {"t": "Unauthorized Access to Sensitive Organizational Data", "dt": 9, "pv": 5}};
+const S=[
+ {row:"exf-personal",pop:"cus",intent:"d",t:"A departing relationship manager takes the customer portfolio to use it in the same role elsewhere",also:"Business information",
+  sig:["Leaver status from the HR system","Bulk download or export from the CRM","Email to a personal address, upload to personal cloud, USB","Printing volume"],
+  chain:{prevent:"Sensitivity labels on customer data; DLP block on personal addresses for the departing population",detect:"Purview Insider Risk Management departing-user policy; DLP alert on volume; endpoint signals",contain:"Account and session revocation on the leaving date; device return",respond:"Case with evidence of the movement; letter from Legal; the next employer where the law allows"},
+  itm:["MT003","IF022.002","IF010.002","IF001.001","IF002.001","IF006.002"]},
+ {row:"exf-personal",pop:"cus",intent:"n",t:"An employee forwards customer records to a personal mailbox to work from home",
+  sig:["Email to a personal domain with attachments","Repeated pattern outside working hours"],
+  chain:{prevent:"DLP policy tip and block on personal domains; a sanctioned remote-work path",detect:"DLP alert; Insider Risk Management cumulative exfiltration indicator",contain:"Deletion request; access to the sanctioned path",respond:"Awareness conversation with the manager; recorded, no discipline on the first occurrence unless the policy says so"},
+  itm:["MT008","IF010.002","IF022.002"]},
+ {row:"exf-personal",pop:"data",intent:"d",t:"An analyst exports the whole customer base from the data platform with one query",also:"Business information",
+  sig:["Query result size far above the analyst's baseline","Export to a notebook, file or personal location","Access to tables outside the analyst's domain"],
+  chain:{prevent:"Row and column limits on exports; data platform roles by domain; aggregate-only views",detect:"Data platform audit logs correlated in the SIEM; Insider Risk Management on the export file; UEBA on query volume",contain:"Token and session revocation; export quarantine",respond:"Case on the platform's audit trail; the data owner; notification assessment if the data left"},
+  itm:["IF045.001","IF004.008","IF022.002"]},
+ {row:"exf-personal",pop:"peo",intent:"d",t:"An HR officer extracts employee pay and performance data for a recruiter or a dispute",
+  sig:["Bulk reports from the HR system outside the payroll cycle","Export to personal locations"],
+  chain:{prevent:"HR system roles by population; export restricted to named roles",detect:"HR system audit logs in the SIEM; DLP on employee data patterns",contain:"Account review; export quarantine",respond:"Case; the Data Protection Officer; the works council where it has a right to be informed"},
+  itm:["IF045.002","IF022.002"]},
+ {row:"exf-personal",pop:"nhi",intent:"e",t:"An agent or automation with its own identity sends internal data to an external service as part of a task",also:"Business information",
+  sig:["Service principal or agent identity with data access beyond the task","Outbound transfer to a new destination","The delegation chain: who started the task, which permissions it held"],
+  chain:{prevent:"Least privilege on agent identities; approved destinations; the delegation record",detect:"Audit of the agent's actions correlated to the principal; DLP on the outbound channel; anomaly on destinations",contain:"Credential revocation; the agent paused",respond:"Case on the delegation record; the owner of the agent; the data protection assessment"},
+  itm:["ME030","IF028","IF001.006","IF004.008"]},
+ {row:"exf-business",pop:"ops",intent:"d",t:"A procurement officer passes tender documents and price lists to a bidder",also:"Money and physical assets",
+  sig:["Access to tender files outside the officer's lots","Sharing links to external accounts","Communication with the bidder's domain"],
+  chain:{prevent:"Need-to-know access on tender repositories; external sharing restricted",detect:"Sharing and download events on the tender library; DLP on bid documents",contain:"Link revocation; access removal from the procedure",respond:"Case; the procurement office and Legal; the procedure's integrity measures"},
+  itm:["MT006","IF001.007","IF011.003","IF022.001"]},
+ {row:"exf-business",pop:"tech",intent:"d",t:"A departing engineer takes source code, architecture and security documentation to reuse in the next job",also:"Systems and operations",
+  sig:["Leaver status","Repository cloning and bulk downloads","Upload to personal cloud or USB","Access to documentation outside the engineer's projects"],
+  chain:{prevent:"Repository access by project; labels on security documentation; USB control on engineering devices",detect:"Insider Risk Management departing-user policy with repository and device signals; a trainable classifier for source code; EDR on mass copy",contain:"Repository and account revocation; device isolation if the copy is in progress",respond:"Case with the list of what left; Legal; the code's exposure assessed by the owners"},
+  itm:["MT003","IF001.002","IF022.001","IF002.001"]},
+ {row:"exf-business",pop:"exec",intent:"d",t:"A manager with inside information about a transaction shares it before it is public",
+  sig:["Access to deal documents by people outside the deal team","Forwarding or printing of board material","Communications with outside parties close to the announcement"],
+  chain:{prevent:"Insider list and deal rooms with named access; labels on inside information",detect:"Access and sharing events on deal rooms; Purview Communication Compliance where lawful; market surveillance by the compliance function",contain:"Deal room access review; legal hold",respond:"Market abuse procedure: the compliance function, the issuer's disclosure duties, the regulator"},
+  itm:["MT005","IF022.005","IF045.003","IF016.004"]},
+ {row:"exf-business",pop:"third",intent:"d",t:"A supplier's technician keeps copies of the organization's documents after the contract ends",also:"Personal data",
+  sig:["Guest identity still active after the contract end date","Downloads in the last weeks of the contract","Unmanaged device access"],
+  chain:{prevent:"Guest lifecycle tied to the contract; access from managed devices only; labels that travel with the document",detect:"Entra guest expiry and access reviews; download events from unmanaged devices; Insider Risk Management on guests where licensed",contain:"Guest disablement; sharing link revocation",respond:"Contract clauses; the supplier's management; the data protection assessment"},
+  itm:["ME021","IF039.002","IF022.001"]},
+ {row:"sab-systems",pop:"ops",intent:"d",t:"A plant or control-room operator alters a process setting or a schedule to cause a stoppage",
+  sig:["Setting changes outside maintenance windows","Changes without a work order","Access from an unusual location or account"],
+  chain:{prevent:"Change control with a second pair of eyes; role separation between operation and configuration",detect:"OT and process logs correlated with work orders; alerts on out-of-window changes",contain:"Rollback; account suspension; manual oversight",respond:"Incident procedure; the operations director; the reporting duties of a critical entity"},
+  itm:["IF042","IF013.002","IF037"]},
+ {row:"sab-systems",pop:"tech",intent:"d",t:"A privileged administrator deletes or encrypts data, or plants a time bomb, before or after leaving",
+  sig:["Privileged actions after notice","Mass deletion, backup tampering, scheduled tasks created","Access outside working hours"],
+  chain:{prevent:"Privileged access management; immutable backups; privileged rights removed on notice",detect:"Defender XDR and SIEM rules on destructive actions and privilege use; Insider Risk Management departing-user policy for privileged roles",contain:"Privileged session termination; account disablement; restore",respond:"Incident and case; forensic preservation; Legal; the reporting duties where the incident is significant"},
+  itm:["MT023","ME007","IF013.001","IF014.005","IF027.005"]},
+ {row:"sab-systems",pop:"tech",intent:"n",t:"An administrator applies a change without testing and takes a service down",
+  sig:["Change outside the change process","Incident following the change"],
+  chain:{prevent:"Change management; test environments; four-eyes on production",detect:"Change and incident correlation",contain:"Rollback",respond:"Post-incident review; no case unless the pattern repeats"},
+  itm:["MT016","IF014","IF013.002"]},
+ {row:"sab-systems",pop:"third",intent:"d",t:"A contractor with system access disables a control or leaves a backdoor at the end of the engagement",
+  sig:["Configuration changes in the last days of the contract","Accounts or keys created without a request","Access after the end date"],
+  chain:{prevent:"Contractor access through PAM; access expiry on the contract date; change review for third-party work",detect:"Change audit on the contractor's accounts; new credential alerts",contain:"Access removal; credential rotation",respond:"Incident; contract clauses; the supplier"},
+  itm:["IF014.004","IF011.001","PR042"]},
+ {row:"sab-systems",pop:"nhi",intent:"e",t:"An agent with change rights modifies configuration or deletes resources beyond its task",
+  sig:["Agent identity performing destructive actions","Actions outside the task's scope or time"],
+  chain:{prevent:"No destructive rights on agent identities without approval steps; scoped permissions",detect:"Audit of the agent's actions against its task; alerts on destructive calls",contain:"Agent paused; credentials revoked; restore",respond:"Case on the delegation record; the owner; the controlled test before the agent runs again"},
+  itm:["ME030","IF028.002","IF014.005"]},
+ {row:"sab-data",pop:"data",intent:"d",t:"A data engineer corrupts a dataset or a model that decisions depend on",also:"Business information",
+  sig:["Writes to production datasets outside pipelines","Schema or value changes without a ticket"],
+  chain:{prevent:"Write access through pipelines only; versioned datasets",detect:"Data platform audit; data quality checks that alert on drift",contain:"Restore from version; access review",respond:"Case; the data owner; the decisions taken on the corrupted data reviewed"},
+  itm:["IF040.001","IF029.001"]},
+ {row:"sab-data",pop:"peo",intent:"d",t:"An HR officer alters a closed investigation record or a performance history",also:"Personal data",
+  sig:["Edits to records after closure","Edits outside the officer's population"],
+  chain:{prevent:"Records locked after closure; HR system roles by population",detect:"HR system audit logs; edit alerts on closed records",contain:"Record restored from the audit trail; access review",respond:"Case; the Data Protection Officer; the integrity of the investigation restored"},
+  itm:["IF040.001","IF045.002"]},
+ {row:"fra-money",pop:"cus",intent:"d",t:"A customer-facing employee moves funds or changes customer details for their own benefit",also:"Personal data",
+  sig:["Transactions on dormant or vulnerable customers' accounts","Changes to contact details followed by transactions","Operations outside the employee's portfolio"],
+  chain:{prevent:"Segregation of duties; limits; customer confirmation of changes",detect:"Transaction monitoring; anti-fraud rules on employee-initiated operations; Insider Risk Management for risky activity in business applications",contain:"Transaction block; account review",respond:"Fraud case; the customer informed; the regulator's and the prosecutor's paths"},
+  itm:["IF016.002","IF040.001","IF045.001"]},
+ {row:"fra-money",pop:"ops",intent:"d",t:"An employee in payments or procurement creates or alters a supplier and approves payments to it",
+  sig:["Supplier master data changes followed by payments","Same approver on creation and payment","Bank account shared with an employee"],
+  chain:{prevent:"Segregation between master data and payment; dual approval; supplier verification",detect:"ERP audit logs; rules on master data and payment correlation; UEBA on the approver",contain:"Payment hold; supplier block",respond:"Fraud case; Finance and Legal; recovery"},
+  itm:["IF016.006","IF016.005","IF016.002"]},
+ {row:"fra-money",pop:"exec",intent:"d",t:"A manager uses their authority to approve expenses, contracts or favours outside the rules",
+  sig:["Approvals that bypass thresholds or split amounts","Contracts with related parties","Patterns in expense claims"],
+  chain:{prevent:"Approval limits enforced in systems; related-party declarations",detect:"ERP and expense analytics; internal audit sampling",contain:"Approval rights suspended",respond:"Investigation by Internal Audit and Legal; the governance body"},
+  itm:["MT021","IF044.001","IF044.003","IF016.013"]},
+ {row:"fra-money",pop:"peo",intent:"d",t:"A payroll officer creates a ghost employee or alters bank details for salaries",also:"Personal data",
+  sig:["New employee records without hiring workflow","Bank detail changes before the payroll run","Two employees with one account"],
+  chain:{prevent:"Hiring workflow as the only source of employee records; dual control on bank details",detect:"HR and payroll audit correlation; duplicate account checks",contain:"Payroll hold on the records",respond:"Fraud case; recovery; the Data Protection Officer"},
+  itm:["IF016.002","IF040.001","IF043.001"]},
+ {row:"fra-money",pop:"third",intent:"d",t:"A contractor bills hours or deliveries not performed, with an insider's approval",
+  sig:["Timesheets and deliveries without system evidence","Approvals concentrated on one person"],
+  chain:{prevent:"Evidence-based acceptance; rotation of approvers",detect:"Analytics on invoices against system records",contain:"Payment hold",respond:"Contract remedies; the insider's case"},
+  itm:["MT006","IF016.006","IF016.009","IF043.005"]},
+ {row:"mis-personal",pop:"cus",intent:"d",t:"An employee looks up the records of a customer they know, with no business reason",
+  sig:["Access to records outside the employee's portfolio","Searches by name","Access patterns around people in the news"],
+  chain:{prevent:"Need-to-know access; the reason for access recorded at lookup",detect:"Application access logs correlated with portfolio and role; alerts on named-person lookups",contain:"Access review",respond:"Case; the Data Protection Officer; the customer's rights; the breach notification assessment"},
+  itm:["MT018","IF045.001"]},
+ {row:"mis-personal",pop:"tech",intent:"d",t:"An administrator reads a colleague's mailbox or files using privileged access",
+  sig:["Mailbox or file access by an administrator outside a ticket","Privileged access to personal workspaces"],
+  chain:{prevent:"Privileged access requires a ticket and a second approval; audit of mailbox access enabled",detect:"Mailbox and file audit logs; alerts on administrator access to user content",contain:"Privilege suspension",respond:"Case; the Data Protection Officer; the works council's involvement where required; discipline"},
+  itm:["ME007","IF039.004","IF045.002"]},
+ {row:"mis-personal",pop:"peo",intent:"d",t:"An HR officer accesses performance or health data of colleagues outside their remit",
+  sig:["Access outside the officer's population","Lookups without a case or a process"],
+  chain:{prevent:"HR system roles by population; special-category data behind a separate role",detect:"HR system audit logs; alerts on special-category access",contain:"Access review",respond:"Case; the Data Protection Officer; the person's rights"},
+  itm:["IF045.002"]},
+ {row:"mis-personal",pop:"exec",intent:"d",t:"A manager uses monitoring data or access logs to target an employee outside any procedure",
+  sig:["Requests for reports on named individuals","Access to monitoring data outside the function"],
+  chain:{prevent:"Monitoring data accessible only to the function, under the decision matrix",detect:"Audit of the function's tools; requests logged",contain:"Request refused; access review",respond:"The governance body; the works council; the Data Protection Officer"},
+  itm:["IF045.002","IF021"]},
+ {row:"mis-personal",pop:"nhi",intent:"e",t:"An agent profiles or scores employees from data it was not meant to combine",
+  sig:["Agent identity reading HR and activity data together","Outputs about named individuals"],
+  chain:{prevent:"Purpose limitation in the agent's permissions; no access to HR data without a decision",detect:"Audit of the agent's data access by category",contain:"Agent paused; outputs deleted",respond:"The Data Protection Officer; the impact assessment; the owner of the agent"},
+  itm:["ME030","IF028.001","IF045.002"]}
+];
+
+const map=document.getElementById("map"), drawer=document.getElementById("drawer");
+let sel=null;
+const cellsFor=(r,p)=>S.filter(s=>s.row===r&&s.pop===p);
+function art(c){return c.startsWith("MT")?"AR1":c.startsWith("ME")?"AR2":c.startsWith("PR")?"AR3":c.startsWith("IF")?"AR4":"AR5";}
+function build(){
+  map.innerHTML="";
+  const c0=document.createElement("div");c0.className="corner";c0.innerHTML="<span>Act and asset &nbsp;/&nbsp; access population</span>";map.appendChild(c0);
+  POPS.forEach(p=>{const d=document.createElement("div");d.className="col";d.innerHTML="<b>"+p.name+"</b><small>"+p.def+"</small>";map.appendChild(d);});
+  ROWS.forEach(r=>{
+    const h=document.createElement("div");h.className="row";h.innerHTML="<b>"+r.act+"</b><span>"+r.asset+"</span><small>"+r.def+"</small>";map.appendChild(h);
+    POPS.forEach(p=>{
+      const list=cellsFor(r.id,p.id);
+      const c=document.createElement("div");c.className="cell"+(list.length?" has":"");c.setAttribute("role","gridcell");c.dataset.r=r.id;c.dataset.p=p.id;
+      if(list.length){
+        c.tabIndex=0;c.setAttribute("aria-label",list.length+" scenario"+(list.length>1?"s":"")+": "+r.act+", "+r.asset+", "+p.name);
+        const k=document.createElement("div");k.className="k";k.textContent=list[0].t.split(",")[0];c.appendChild(k);
+        const d=document.createElement("div");d.className="d";list.forEach(s=>{const i=document.createElement("i");if(s.intent==="n")i.className="neg";d.appendChild(i);});c.appendChild(d);
+        const n=document.createElement("span");n.className="n";n.textContent=list.length;c.appendChild(n);
+        const open=()=>{sel={r:r.id,p:p.id};paint();show(r,p,list);drawer.scrollIntoView({behavior:"smooth",block:"start"});};
+        c.addEventListener("click",open);c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open();}});
+      }
+      map.appendChild(c);
+    });
+  });
+}
+function paint(){map.querySelectorAll(".cell").forEach(c=>c.classList.toggle("on",!!sel&&sel.r===c.dataset.r&&sel.p===c.dataset.p));}
+function show(r,p,list){
+  let h='<div class="where"><h2>'+r.act+': '+r.asset.toLowerCase()+'</h2><span>'+p.name+' &nbsp;|&nbsp; '+list.length+' scenario'+(list.length>1?'s':'')+'</span></div><div class="cards">';
+  list.forEach(s=>{
+    h+='<article class="card"><p class="tag">'+(s.intent==="n"?"Negligent":s.intent==="d"?"Deliberate":"Deliberate or negligent")+(s.also?' &nbsp;|&nbsp; also '+s.also.toLowerCase():'')+'</p>'
+      +'<h3>'+s.t+'</h3><dl>'
+      +'<dt>Signals</dt><dd>'+s.sig.join("; ")+'</dd>'
+      +'<dt>Chain of controls</dt><dd><div class="chain"><div><b>Prevent</b>'+s.chain.prevent+'</div><div><b>Detect</b>'+s.chain.detect+'</div><div><b>Contain</b>'+s.chain.contain+'</div><div><b>Respond</b>'+s.chain.respond+'</div></div></dd>'
+      +'<dt>Insider Threat Matrix™ entries, with their detections and preventions</dt><dd class="itm">'+s.itm.map(c=>{const e=ITMN[c]||{t:"",dt:0,pv:0};return '<a href="https://insiderthreatmatrix.org/articles/'+art(c)+'/sections/'+c.split(".")[0]+'" target="_blank" rel="noopener">'+c+'</a> '+e.t+(e.dt||e.pv?' <span class="cnt">'+e.dt+' DT, '+e.pv+' PV</span>':'');}).join("; ")+'</dd>'
+      +'<dt>Implementation</dt><dd>On Microsoft Purview, Defender and Entra, with the agreement clauses and the impact assessment paragraphs that make each control lawful: in the kit.</dd>'
+      +'<dt>Reporting obligations</dt><dd>'+OBL[r.asset]+(s.also&&OBL[s.also]?'. '+OBL[s.also]:'')+'. <a href="https://alessandroaledda.com/iter/" target="_blank" rel="noopener">ITER</a></dd>'
+      +'</dl></article>';
+  });
+  h+='</div>';
+  drawer.innerHTML=h;drawer.classList.add("open");
+}
+build();document.getElementById("itmv").textContent=ITM_VERSION;
+</script>
+</body>
+</html>
