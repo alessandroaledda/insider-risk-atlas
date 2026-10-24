@@ -9,7 +9,12 @@
 @font-face{font-family:"Source Serif 4";font-weight:400;font-style:normal;src:url("fonts/SourceSerif4-400-normal-latin.woff2") format("woff2")}
 @font-face{font-family:"Source Serif 4";font-weight:600;font-style:normal;src:url("fonts/SourceSerif4-600-normal-latin.woff2") format("woff2")}
 @font-face{font-family:"JetBrains Mono";font-weight:400;font-style:normal;src:url("fonts/JetBrainsMono-400-normal-latin.woff2") format("woff2")}
-:root{--ink:#16202B;--ink2:#1C2733;--ink3:#243040;--paper:#F7F7F4;--paper2:rgba(247,247,244,.72);--paper3:rgba(247,247,244,.46);--acc:#A47A46;--acc2:#C49A63;--line:rgba(247,247,244,.14);--line2:rgba(247,247,244,.26);--cell:rgba(247,247,244,.07);--cellh:rgba(247,247,244,.13)}
+:root{--tri-d:rgba(247,247,244,.13);--tri-n:rgba(247,247,244,.05);--ink:#16202B;--ink2:#1C2733;--ink3:#243040;--paper:#F7F7F4;--paper2:rgba(247,247,244,.72);--paper3:rgba(247,247,244,.46);--acc:#A47A46;--acc2:#C49A63;--line:rgba(247,247,244,.14);--line2:rgba(247,247,244,.26);--cell:rgba(247,247,244,.07);--cellh:rgba(247,247,244,.13)}
+html[data-theme="ivory"]{--ink:#F7F7F4;--ink2:#FFFFFF;--ink3:#F2ECE4;--paper:#16202B;--paper2:#3A3A38;--paper3:#6B6B68;--acc:#A47A46;--acc2:#8A653A;--line:#DCDCD8;--line2:#C9C9C4;--cell:#EDE8E0;--cellh:#E6DFD3;--tri-d:#E9E2D6;--tri-n:#F3EFE8}
+html[data-theme="ivory"] .cell.has.on{background:linear-gradient(to bottom right,var(--acc2) 0 50%,var(--acc) 50% 100%)}
+html[data-theme="ivory"] .cell.has.on .dn,html[data-theme="ivory"] .cell.has.on .nn{color:#F7F7F4}
+html[data-theme="ivory"] .cell.has.on .dn.z,html[data-theme="ivory"] .cell.has.on .nn.z{color:rgba(247,247,244,.6)}
+html[data-theme="ivory"] .card{box-shadow:0 1px 0 rgba(22,32,43,.04)}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--ink);color:var(--paper);font-family:"Source Serif 4",Georgia,"Times New Roman",serif;font-size:17px;line-height:1.5}
 a{color:var(--acc2)}
@@ -21,7 +26,10 @@ h1{font-size:46px;line-height:1.05;font-weight:400;margin:0 0 10px;letter-spacin
 
 .map{display:grid;grid-template-columns:260px repeat(8,minmax(0,1fr));gap:8px;align-items:stretch}
 .map .corner{display:flex;align-items:flex-end;padding:0 0 10px 2px}
+.map .corner{flex-direction:column;align-items:flex-start;gap:8px}
 .map .corner span{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--paper3)}
+.map .corner span.key{font-family:"Source Serif 4",Georgia,serif;font-size:13px;letter-spacing:0;text-transform:none;color:var(--paper2)}
+.map .corner span.key em{font-style:normal;color:var(--paper)}
 .map .col{display:flex;flex-direction:column;justify-content:flex-end;padding:0 4px 10px;text-align:center}
 .map .col b{display:block;font-weight:600;font-size:14px;line-height:1.2;color:var(--paper)}
 .map .col small{display:block;font-size:11.5px;color:var(--paper3);line-height:1.3;margin-top:4px}
@@ -33,19 +41,17 @@ h1{font-size:46px;line-height:1.05;font-weight:400;margin:0 0 10px;letter-spacin
 .cell.has{background:var(--cell);border-color:transparent;cursor:pointer;transition:background .15s ease}
 .cell.has:hover,.cell.has:focus-visible{background:var(--cellh);outline:0}
 .cell.has.on{background:var(--acc);border-color:var(--acc)}
-.cell.has{display:flex;flex-direction:column;justify-content:center;gap:6px;padding:10px 12px}
-.cell .ct{display:flex;align-items:center;gap:8px;line-height:1}
-.cell .ct i{display:block;width:8px;height:8px;border-radius:50%;background:var(--acc2);flex:0 0 auto}
-.cell .ct i.neg{background:transparent;border:1px solid var(--acc2)}
-.cell .ct b{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:15px;font-weight:400;color:var(--paper)}
-.cell .ct span{font-size:12px;color:var(--paper3)}
-.cell.has.on .ct b,.cell.has.on .ct span{color:var(--ink)}
-.cell.has.on .ct i{background:var(--ink)}
-.cell.has.on .ct i.neg{background:transparent;border-color:var(--ink)}
+.cell.has{background:linear-gradient(to bottom right,var(--tri-d) 0 50%,var(--tri-n) 50% 100%);border-color:transparent}
+.cell .dn,.cell .nn{position:absolute;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:20px;line-height:1;color:var(--paper)}
+.cell .dn{left:12px;top:11px}
+.cell .nn{right:12px;bottom:10px}
+.cell .dn.z,.cell .nn.z{color:var(--paper3);font-size:14px}
+.cell.has.on{background:linear-gradient(to bottom right,var(--acc2) 0 50%,var(--acc) 50% 100%)}
+.cell.has.on .dn,.cell.has.on .nn{color:var(--ink)}
+.cell.has.on .dn.z,.cell.has.on .nn.z{color:rgba(22,32,43,.55)}
 .legend{display:flex;flex-wrap:wrap;gap:22px;margin:18px 0 0;font-size:13.5px;color:var(--paper2)}
-.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--acc2);margin-right:7px;vertical-align:middle}
-.legend i.neg{background:transparent;border:1px solid var(--acc2)}
 .legend b{display:inline-block;width:14px;height:14px;background:var(--cell);vertical-align:middle;margin-right:7px;border-radius:2px}
+.legend b.tri{background:linear-gradient(to bottom right,var(--tri-d) 0 50%,var(--tri-n) 50% 100%);border:1px solid var(--line)}
 .legend b.on{background:var(--acc)}
 
 .drawer{margin-top:34px;border-top:1px solid var(--line2);padding-top:26px;display:none}
@@ -74,7 +80,7 @@ h1{font-size:46px;line-height:1.05;font-weight:400;margin:0 0 10px;letter-spacin
 .read p b{color:var(--paper);font-weight:600}
 footer{margin-top:44px;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--paper3)}
 
-@media (max-width:1100px){.map{grid-template-columns:200px repeat(8,minmax(0,1fr))}.cell .ct span{display:none}.cell{min-height:64px}}
+@media (max-width:1100px){.map{grid-template-columns:200px repeat(8,minmax(0,1fr))}.cell .dn,.cell .nn{font-size:16px}.cell{min-height:64px}}
 @media (max-width:820px){.wrap{padding:28px 16px 48px}h1{font-size:34px}.sub{font-size:18px}.mapwrap{overflow-x:auto;margin:0 -16px;padding:0 16px}.map{min-width:860px}.cards{grid-template-columns:1fr}.card .chain{grid-template-columns:1fr 1fr}}
 </style>
 </head>
@@ -82,26 +88,26 @@ footer{margin-top:44px;font-family:"JetBrains Mono",ui-monospace,monospace;font-
 <div class="wrap">
 <p class="eyebrow">Insider risk management</p>
 <h1>Insider Risk Map</h1>
-<p class="sub">An organizational layer for the Insider Threat Matrix&trade;: what is done to which asset, by who has the access.</p>
-<p class="lead">The Insider Threat Matrix&trade; classifies what an insider does, by technique. A program has to answer two questions before it can choose its use cases and write its agreements: who, in this organization, has the access, and which asset the act reaches. The rows combine the act with the asset; the columns are populations defined by what their access reaches. Select a cell: the scenarios open below, each with its signals, the chain of controls that answers it, its Insider Threat Matrix&trade; entries, and the reporting duty that follows from the asset.</p>
+<p class="sub">A layer above the Insider Threat Matrix&trade; for the people who build the controls: what is done, to which asset, by whom.</p>
+<p class="lead">The Insider Threat Matrix&trade; is an open framework for computer-enabled insider threat investigations. It maps insider activity exhaustively, from motive to anti-forensics, so that an investigator can reconstruct an event from its first step to its aftermath. It is written for investigators. The Insider Risk Map is a layer above it, for the people who design, build and keep the controls: security architects, detection engineers, the function that runs the program. It places the scenarios where an organization can act on them. The rows are the act and the asset it reaches; the columns are the populations defined by what their access reaches. Select a cell: its scenarios open below, each with the signals that make it observable, the chain of controls that answers it, the Matrix entries that describe its techniques, and the reporting duty the asset carries under European law.</p>
 
 <div class="mapwrap"><div class="map" id="map" role="grid" aria-label="Acts on assets, by access population"></div></div>
 <div class="legend">
-  <span><b></b>A cell with scenarios; empty cells are empty on purpose</span>
-  <span><i></i>Deliberate: the person meant the act</span>
-  <span><i class="neg"></i>Negligent: error, shortcut, or a misconfigured identity</span>
+  <span><b class="tri"></b>A cell with scenarios: the number above the diagonal is deliberate, the number below is negligent; a dash is none</span>
   <span><b class="on"></b>The selected cell; its scenarios open below</span>
+  <span>An empty cell is empty on purpose: no scenario that could be stated with its signals</span>
 </div>
 
 <section class="drawer" id="drawer" aria-live="polite"></section>
 
 <section class="read">
   <h2>How to read it</h2>
-  <p><b>The rows are the act and the asset together.</b> A motive does not change what is observed or what follows: the client list leaves the organization the same way whether it is sold, carried to the next job, or printed to be worked on at home. The act and the asset do change both: data leaving is seen on its movement and answered with evidence of what left; a system damaged is seen on changes and answered with a restore; money diverted is seen in the business application and answered with a hold; a person harmed is seen on access to records and answered through the Data Protection Officer. Intent, deliberate or negligent, is a property of the scenario: the same alert, a different consequence and a different lever.</p>
-  <p><b>The columns are populations defined by what their access reaches</b>, not by the department's name, so that the same map fits a bank, a utility or a manufacturer. An organization maps its own roles onto them.</p>
-  <p><b>The Insider Threat Matrix&trade; entries carry the techniques.</b> Each scenario points to the ITM motives, means and infringements that describe it, down to the channel; the map adds no technique of its own. Detections and preventions per technique are the Matrix's; the scenario is where an organization decides which of them it needs.</p>
-  <p><b>Out of scope by definition:</b> an external attacker using a stolen identity, which is the work of security operations. A colleague using another colleague's identity is inside the map: the act is theirs, the identity is the channel.</p>
-  <p><b>What an organization adds on its copy:</b> which scenarios apply and which it has seen; for each, whether the act is visible and whether the asset is recognized; the lever chosen: governance, technical, awareness, or the hand-over to another function. The map does not measure anyone's coverage; the copy does.</p>
+  <p><b>A row is an act on an asset.</b> Six rows, because six combinations change what is observed and what follows. Data leaving is seen on its movement and answered with the evidence of what left. A system damaged is seen on changes and destructive actions and answered with a restore. Records altered are seen on writes outside the process and answered by restoring the version. Money diverted is seen in the business application, not in file movement, and answered with a hold. A person harmed is seen on access to records without a business reason and answered through the Data Protection Officer and the person's rights. The motive is absent on purpose: a client list leaves the organization the same way whether it is sold, carried to the next employer, or printed to be worked on at home. The motive changes the consequence; the act and the asset change the controls.</p>
+  <p><b>Intent is a property of the scenario, not a row.</b> Deliberate or negligent: the same alert, a different consequence and a different lever. Most insider incidents are negligent; the map carries the negligent scenario beside the deliberate one in every cell where one exists.</p>
+  <p><b>A column is a population defined by what its access reaches</b>, not by the name of a department, so that one map fits a bank, a utility and a manufacturer. Customer-facing access reaches one customer at a time; data and analytics access reaches the whole base in one query; the two are different risks with different signals. Non-human identities, agents and automations acting under their own identity, are a population because their access is real and their principal is not always visible.</p>
+  <p><b>The Matrix carries the techniques.</b> Every scenario points to the Insider Threat Matrix&trade; motives, means and infringements that describe it, down to the channel, with the number of detections and preventions the Matrix holds for each. The map adds no technique of its own. Where an infringement of the Matrix does not appear on the map, the coverage table says why: a conduct an organization in Europe may not monitor, a means rather than an act, or another function's domain.</p>
+  <p><b>Out of scope by definition:</b> an external attacker using a stolen identity, which belongs to security operations. A colleague using another colleague's identity is on the map: the act is theirs, the identity is the channel.</p>
+  <p><b>What an organization adds on its copy:</b> which scenarios apply and which it has seen; for each, whether the act is visible and whether the asset is recognized; the lever it chose, governance, technical, awareness, or the hand-over to another function. The map does not measure anyone's coverage. The copy does.</p>
 </section>
 
 <section class="read">
@@ -111,14 +117,19 @@ footer{margin-top:44px;font-family:"JetBrains Mono",ui-monospace,monospace;font-
   <details><summary style="cursor:pointer;color:var(--acc2);font-size:15px;margin-top:8px">Excluded, with the reason</summary><p><b>IF007 Unlawfully Accessing Copyrighted Material</b>: Conduct towards third parties' rights, not an act on the organization's assets; acceptable-use matter.</p><p><b>IF008 Inappropriate Web Browsing</b>: Conduct; the monitoring of browsing content is restricted under European employment law and is not a program measure.</p><p><b>IF009 Installing Unapproved Software</b>: Endpoint hygiene, handled by security operations; appears in scenarios as a means, not as the act.</p><p><b>IF012 Public Statements Resulting in Brand Damage</b>: Communications and reputation; not an act on an information asset; the communications and HR functions.</p><p><b>IF017 Excessive Personal Use</b>: Conduct; a program measure here would fail the proportionality test in every European jurisdiction.</p><p><b>IF019 Non-Corporate Device</b>: A means (the device), not an act; appears in scenarios as the channel.</p><p><b>IF020 Unauthorized VPN Client</b>: A means; network hygiene, handled by security operations.</p><p><b>IF023 Regulatory Non-Compliance</b>: Export, sanctions and competition law: the trade compliance function's domain; an interface, not a program measure.</p><p><b>IF025 Internal Credential Sharing</b>: A means: the colleague's identity as the channel; the act performed with it sits in its own row.</p><p><b>IF031 Unauthorized Presence in Restricted Physical Areas</b>: Physical security's domain; a preparation for sabotage or theft, handled at the interface with corporate security.</p><p><b>IF035 Unauthorized Work Location</b>: Conduct and compliance (tax, immigration, data residency); location monitoring is restricted and is not a program measure.</p><p><b>IF038 Undisclosed Concurrent Employment</b>: Conflict of interest and conduct; the HR and compliance functions.</p><p><b>IF039 Unauthorized Account Access</b>: A means: access to another account; the act performed with it sits in its own row.</p><p><b>IF041 Unauthorized Organizational Representation</b>: Conduct and legal exposure; where a contract or payment follows, the fraud row applies.</p><p>Means, motives, preparation and anti-forensics are properties of a scenario and are cited inside the scenarios, not placed on the grid.</p></details>
 </section>
 <section class="read" style="margin-top:28px">
-  <h2>Attribution and licence</h2>
-  <p>Mapping to Insider Threat Matrix&trade; entries, version <span id="itmv"></span>. Insider Threat Matrix&trade; is a trademark of Forscie Limited; the framework is published under the Apache License 2.0 at insiderthreatmatrix.org. This map is an independent work and is not sponsored, endorsed by, or affiliated with Forscie Limited.</p>
-  <p>Insider Risk Map &copy; Alessandro Aledda, licensed under CC BY 4.0: use it, adapt it, build on it, with attribution. Reporting obligations by asset follow Insider Threat Event Requirements (ITER&trade;), alessandroaledda.com/iter/.</p>
+  <h2>Version</h2>
+  <p>Version <b>0.4</b> &nbsp;|&nbsp; 24 October 2026. <b>39</b> scenarios, <b>22</b> deliberate and <b>17</b> negligent, across <b>6</b> rows and <b>8</b> access populations, mapped to <b>61</b> entries of the Insider Threat Matrix&trade;, version <span id="itmv"></span>. The map is one file and the mapping is pinned to that version of the Matrix; a new version of the Matrix re-runs the coverage table. Free to use under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license noopener">CC BY 4.0</a>. The file and the coverage table are in <a href="https://github.com/alessandroaledda/insider-risk-map" target="_blank" rel="noopener">the repository</a>.</p>
 </section>
-<footer>Alessandro Aledda &nbsp;|&nbsp; Insider Risk Consultant &nbsp;|&nbsp; Insider Risk Map, version 0.4, October 2026</footer>
+<section class="read" style="margin-top:28px">
+  <h2>Contributing</h2>
+  <p>The map grows by contribution and debate. If a scenario is missing, if a mapping to the Matrix is wrong, or if an exclusion is disputed, <a href="https://www.linkedin.com/in/alessandroaledda/" target="_blank" rel="noopener">send me a message on LinkedIn</a>. Contributors are named with their agreement.</p>
+  <p>Insider Risk Map, INTRA&trade; and ITER&trade;, Insider Threat and Risk Architecture and Insider Threat Event Requirements, are unregistered trade marks of Alessandro Aledda. Insider Threat Matrix&trade; is a trademark of Forscie Limited; the framework is published under the Apache License 2.0 at insiderthreatmatrix.org. This map is an independent work and is not sponsored, endorsed by, or affiliated with Forscie Limited.</p>
+</section>
+<footer>Alessandro Aledda &nbsp;|&nbsp; Insider Risk Consultant &nbsp;|&nbsp; Insider Risk Map</footer>
 </div>
 
 <script>
+if(new URLSearchParams(location.search).get("theme")==="ivory")document.documentElement.setAttribute("data-theme","ivory");
 const ITM_VERSION="2.13.0";
 const ROWS=[
  {id:"exf-personal",act:"Exfiltration",asset:"Personal data",def:"Data about customers or employees leaves the organization's control"},
@@ -305,7 +316,7 @@ const cellsFor=(r,p)=>S.filter(s=>s.row===r&&s.pop===p);
 function art(c){return c.startsWith("MT")?"AR1":c.startsWith("ME")?"AR2":c.startsWith("PR")?"AR3":c.startsWith("IF")?"AR4":"AR5";}
 function build(){
   map.innerHTML="";
-  const c0=document.createElement("div");c0.className="corner";c0.innerHTML="<span>Act and asset &nbsp;/&nbsp; access population</span>";map.appendChild(c0);
+  const c0=document.createElement("div");c0.className="corner";c0.innerHTML="<span>Act and asset &nbsp;/&nbsp; access population</span><span class=\"key\"><em>Deliberate</em> above the diagonal, <em>negligent</em> below</span>";map.appendChild(c0);
   POPS.forEach(p=>{const d=document.createElement("div");d.className="col";d.innerHTML="<b>"+p.name+"</b><small>"+p.def+"</small>";map.appendChild(d);});
   ROWS.forEach(r=>{
     const h=document.createElement("div");h.className="row";h.innerHTML="<b>"+r.act+"</b><span>"+r.asset+"</span><small>"+r.def+"</small>";map.appendChild(h);
@@ -315,7 +326,8 @@ function build(){
       if(list.length){
         c.tabIndex=0;c.setAttribute("aria-label",list.length+" scenario"+(list.length>1?"s":"")+": "+r.act+", "+r.asset+", "+p.name);
         const nd=list.filter(s=>s.intent==="d").length, nn=list.filter(s=>s.intent==="n").length;
-        c.innerHTML=(nd?'<div class="ct"><i></i><b>'+nd+'</b><span>deliberate</span></div>':'')+(nn?'<div class="ct"><i class="neg"></i><b>'+nn+'</b><span>negligent</span></div>':'');
+        c.innerHTML='<span class="dn'+(nd?'':' z')+'">'+(nd||'\u2013')+'</span><span class="nn'+(nn?'':' z')+'">'+(nn||'\u2013')+'</span>';
+        c.title=nd+' deliberate, '+nn+' negligent';
         const open=()=>{sel={r:r.id,p:p.id};paint();show(r,p,list);drawer.scrollIntoView({behavior:"smooth",block:"start"});};
         c.addEventListener("click",open);c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();open();}});
       }
