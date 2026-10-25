@@ -1,8 +1,8 @@
-# Coverage of the Insider Threat Matrix™ infringements, version 2.13.0
+# Infringement coverage
 
-Where each of the 45 Infringement sections (AR4) of the Insider Threat Matrix™ sits on the Insider Risk Map, and which ones the map excludes and why. The mapping is pinned to this version of the Matrix; a new version of the Matrix requires the table to be reviewed. 31 sections assigned to an act and asset, 14 excluded from the map. Assignment to a row is a classification; the scenarios that cite a section are a separate count, kept in the map's version panel. An exclusion from the map does not exclude an entry from a scenario's references: IF019 and IF039 are cited by scenarios as means.
+Insider Threat Matrix™ version 2.13.0. Of the Matrix's 45 Infringement sections (AR4), 31 are assigned to an act and primary asset. The remaining 14 are excluded from the classification, with a recorded reason. Of the 31 assigned sections, 16 are cited by at least one scenario in this map version. An entry excluded from the classification may still appear in scenario references. IF019 and IF039 are cited as means. A new Matrix version requires a review of this table.
 
-## Assigned to an act and asset
+## Assigned sections
 
 | section | rows of the map | note |
 |---|---|---|
@@ -38,7 +38,7 @@ Where each of the 45 Infringement sections (AR4) of the Insider Threat Matrix™
 | IF044 Abuse of Decision-Making Authority | Fraud: money and physical assets | Authority abused for approval, preference, or waiver |
 | IF045 Unauthorized Data Access | Misconduct towards people; Exfiltration: business information | Access without a business reason: to customer and workforce data it is misconduct; to organizational and third-party data it sits with business information, and a transfer that follows is assessed as its own event |
 
-## Excluded from the map
+## Excluded sections
 
 | section | why |
 |---|---|
@@ -50,13 +50,13 @@ Where each of the 45 Infringement sections (AR4) of the Insider Threat Matrix™
 | IF019 Non-Corporate Device | A means (the device), not an act; appears in scenarios as the channel |
 | IF020 Unauthorized VPN Client | A means; network hygiene, handled by security operations |
 | IF023 Regulatory Non-Compliance | Export, sanctions, and competition law: the trade compliance function's domain; an interface, not a program measure |
-| IF025 Internal Credential Sharing | A means: the colleague's identity as the channel; the act performed with it sits in its own row |
+| IF025 Internal Credential Sharing | A means: the colleague's identity as the channel; the act performed with it is classified under its own act and primary asset |
 | IF031 Unauthorized Presence in Restricted Physical Areas | Physical security's domain; a preparation for sabotage or theft, handled at the interface with corporate security |
 | IF035 Unauthorized Work Location | Conduct and compliance (tax, immigration, and data residency); location monitoring is restricted and is not a program measure |
 | IF038 Undisclosed Concurrent Employment | Conflict of interest and conduct; the HR and compliance functions |
-| IF039 Unauthorized Account Access | A means: access to another account, or to one's own after it should have been closed; the act performed with it sits in its own row |
-| IF041 Unauthorized Organizational Representation | Conduct and legal exposure; where a contract or payment follows, the fraud row applies |
+| IF039 Unauthorized Account Access | A means: access to another account, or to one's own after it should have been closed; the act performed with it is classified under its own act and primary asset |
+| IF041 Unauthorized Organizational Representation | Conduct and legal exposure; where a contract or payment follows, the scenario is classified under fraud |
 
-Means (AR2), motives (AR1), preparation (AR3), and anti-forensics (AR5) are properties of a scenario and are cited inside the scenarios, not placed on the grid.
+Means (AR2), motives (AR1), preparation (AR3), and anti-forensics (AR5) are recorded at scenario level and appear in scenario references; they are not part of the classification.
 
 Insider Threat Matrix™ is a trademark of Forscie Limited; the framework is published under the Apache License 2.0. This table is part of the Insider Risk Map, CC BY 4.0, Alessandro Aledda.
