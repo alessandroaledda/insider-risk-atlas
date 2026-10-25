@@ -19,7 +19,7 @@ Scope: acts by people and identities with legitimate access, including a colleag
 
 ## What an organization does with it
 
-It keeps the scenarios that apply to it, adds its own, and marks on its copy whether the act is visible and the asset recognized, and which lever it chose. Coverage is measured on the copy. The configuration of each control on Microsoft Purview, Defender, and Entra, with the works council agreement clauses and the data protection impact assessment paragraphs it rests on, is a separate, licensed kit.
+It keeps the scenarios that apply to it, adds its own, and marks on its copy whether the act is visible and the asset recognized, and which lever it chose. Coverage is measured on the copy. The configuration of each control on a given platform, with the agreements and assessments it rests on, is organization-specific and outside the map.
 
 ## Versions
 

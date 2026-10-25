@@ -1,6 +1,6 @@
 # Infringement coverage
 
-This table records the relationship between the 45 Infringement sections (AR4) of Insider Threat Matrix™ version 2.13.0 and the six combinations of act and primary asset of Insider Threat Exposure Map (ITEM). A relationship is direct, partial, or contextual. A reference in a scenario does not establish that the whole Matrix section is represented. Section mappings and scenario citations are reported separately. 31 sections have a direct or partial mapping; 14 have no primary mapping. A new Matrix version requires a review of this table.
+This table records the relationship between the 45 Infringement sections (AR4) of Insider Threat Matrix™ version 2.13.0 and the six combinations of act and primary asset of Insider Risk Atlas. A relationship is direct, partial, or contextual. A reference in a scenario does not establish that the whole Matrix section is represented. Section mappings and scenario citations are reported separately. 31 sections have a direct or partial mapping; 14 have no primary mapping. A new Matrix version requires a review of this table.
 
 ## Sections with direct or partial mappings
 
@@ -57,6 +57,6 @@ This table records the relationship between the 45 Infringement sections (AR4) o
 | IF039 Unauthorized Account Access | contextual | Unauthorized account access is recorded as a supporting action when a represented harm follows. Account access alone has no primary assignment in this version. Retained access is distinguished from authorization. |
 | IF041 Unauthorized Organizational Representation | outside | Unauthorized representation alone has no primary assignment in this version. A resulting dishonest financial diversion is classified as fraud; a contract or payment alone is insufficient. |
 
-References may include motives (AR1), means (AR2), preparation (AR3), infringements (AR4), and anti-forensics (AR5) where the scenario supports them. Their role in an ITEM scenario does not change their classification in the Matrix.
+References may include motives (AR1), means (AR2), preparation (AR3), infringements (AR4), and anti-forensics (AR5) where the scenario supports them. Their role in an Atlas scenario does not change their classification in the Matrix.
 
-Insider Threat Matrix™ is a trademark of [Forscie Limited](https://forscie.com/); the framework is published under the Apache License 2.0. This table is part of Insider Threat Exposure Map (ITEM), CC BY 4.0, Alessandro Aledda.
+Insider Threat Matrix™ is a trademark of [Forscie Limited](https://forscie.com/); the framework is published under the Apache License 2.0. This table is part of Insider Risk Atlas, CC BY 4.0, Alessandro Aledda.
