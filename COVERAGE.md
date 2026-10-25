@@ -1,8 +1,8 @@
 # Coverage of the Insider Threat Matrix™ infringements, version 2.13.0
 
-Where each of the 45 Infringement sections (AR4) of the Insider Threat Matrix™ sits on the Insider Risk Map, and which ones the map excludes and why. The mapping is pinned to this version of the Matrix; a new version re-runs the table. 31 sections assigned to rows, 14 excluded from the grid. Assignment to a row is a classification; the scenarios that cite a section are a separate count, kept in the map's version panel. An exclusion from the grid does not exclude an entry from a scenario's references: IF019 and IF039 are cited by scenarios as means.
+Where each of the 45 Infringement sections (AR4) of the Insider Threat Matrix™ sits on the Insider Risk Map, and which ones the map excludes and why. The mapping is pinned to this version of the Matrix; a new version of the Matrix requires the table to be reviewed. 31 sections assigned to an act and asset, 14 excluded from the map. Assignment to a row is a classification; the scenarios that cite a section are a separate count, kept in the map's version panel. An exclusion from the map does not exclude an entry from a scenario's references: IF019 and IF039 are cited by scenarios as means.
 
-## Assigned to rows
+## Assigned to an act and asset
 
 | section | rows of the map | note |
 |---|---|---|
@@ -38,21 +38,21 @@ Where each of the 45 Infringement sections (AR4) of the Insider Threat Matrix™
 | IF044 Abuse of Decision-Making Authority | Fraud: money and physical assets | Authority abused for approval, preference, or waiver |
 | IF045 Unauthorized Data Access | Misconduct towards people; Exfiltration: business information | Access without a business reason: to customer and workforce data it is misconduct; to organizational and third-party data it sits with business information, and a transfer that follows is assessed as its own event |
 
-## Excluded from the grid
+## Excluded from the map
 
 | section | why |
 |---|---|
 | IF007 Unlawfully Accessing Copyrighted Material | Conduct towards third parties' rights, not an act on the organization's assets; acceptable-use matter |
 | IF008 Inappropriate Web Browsing | Conduct; the monitoring of browsing content is restricted under European employment law and is not a program measure |
 | IF009 Installing Unapproved Software | Endpoint hygiene, handled by security operations; appears in scenarios as a means, not as the act |
-| IF012 Public Statements Resulting in Brand Damage | Communications and reputation; not an act on an information asset; the communications and HR functions |
+| IF012 Public Statements Resulting in Brand Damage | Communications and reputation; not an act on an information asset; the communications and Human Resources functions |
 | IF017 Excessive Personal Use | Conduct; a program measure here would have to pass the necessity and proportionality test that European employment and data protection law set for monitoring, and is unlikely to |
 | IF019 Non-Corporate Device | A means (the device), not an act; appears in scenarios as the channel |
 | IF020 Unauthorized VPN Client | A means; network hygiene, handled by security operations |
 | IF023 Regulatory Non-Compliance | Export, sanctions, and competition law: the trade compliance function's domain; an interface, not a program measure |
 | IF025 Internal Credential Sharing | A means: the colleague's identity as the channel; the act performed with it sits in its own row |
 | IF031 Unauthorized Presence in Restricted Physical Areas | Physical security's domain; a preparation for sabotage or theft, handled at the interface with corporate security |
-| IF035 Unauthorized Work Location | Conduct and compliance (tax, immigration, data residency); location monitoring is restricted and is not a program measure |
+| IF035 Unauthorized Work Location | Conduct and compliance (tax, immigration, and data residency); location monitoring is restricted and is not a program measure |
 | IF038 Undisclosed Concurrent Employment | Conflict of interest and conduct; the HR and compliance functions |
 | IF039 Unauthorized Account Access | A means: access to another account, or to one's own after it should have been closed; the act performed with it sits in its own row |
 | IF041 Unauthorized Organizational Representation | Conduct and legal exposure; where a contract or payment follows, the fraud row applies |
