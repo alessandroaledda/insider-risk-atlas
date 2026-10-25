@@ -1,6 +1,6 @@
 # Insider Risk Atlas
 
-Insider risk scenarios classified by access population, act, and primary asset, with references to the [Insider Threat Matrix™](https://insiderthreatmatrix.org/).
+Insider risk scenarios classified by access population, act, and primary asset, with references to the [Insider Threat Matrix™](https://insiderthreatmatrix.org/) by [Forscie](https://forscie.com/).
 
 The Insider Threat Matrix™ describes what an insider does, entry by entry, from motive to anti-forensics. A program in a European organization has to answer two questions before it can choose its use cases and write its agreements: who, in this organization, has the access, and which asset the act reaches. The map draws every scenario as one line from the access population that could carry it, through the act, to the primary asset it reaches; a population, an act, or an asset selects its scenarios. Each scenario carries its signals, the chain of controls that answers it (prevent, detect, contain, respond), its Insider Threat Matrix™ references, and the reporting assessment for the affected assets under European law, with references to Insider Threat Event Requirements (ITER). The scenarios are illustrative.
 
