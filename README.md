@@ -2,7 +2,7 @@
 
 Insider risk scenarios classified by access population, act, and primary asset, with references to the [Insider Threat Matrix™](https://insiderthreatmatrix.org/).
 
-The Insider Threat Matrix™ describes what an insider does, entry by entry, from motive to anti-forensics. A program in a European organization has to answer two questions before it can choose its use cases and write its agreements: who, in this organization, has the access, and which asset the act reaches. The map draws every scenario as one line from the access population that could carry it, through the act, to the primary asset it reaches; a population, an act, or an asset selects its scenarios. Each scenario carries its signals, the chain of controls that answers it (prevent, detect, contain, respond), its Insider Threat Matrix™ references, and the reporting assessment for the affected assets under European law, with references to Insider Threat Event Requirements (ITER). The scenarios are illustrative; their validation by the author is in progress.
+The Insider Threat Matrix™ describes what an insider does, entry by entry, from motive to anti-forensics. A program in a European organization has to answer two questions before it can choose its use cases and write its agreements: who, in this organization, has the access, and which asset the act reaches. The map draws every scenario as one line from the access population that could carry it, through the act, to the primary asset it reaches; a population, an act, or an asset selects its scenarios. Each scenario carries its signals, the chain of controls that answers it (prevent, detect, contain, respond), its Insider Threat Matrix™ references, and the reporting assessment for the affected assets under European law, with references to Insider Threat Event Requirements (ITER). The scenarios are illustrative.
 
 - `index.html`: the map, an HTML page with the fonts beside it and no other dependency. Open it in a browser.
 - `COVERAGE.md`: the relationship between each Infringement section of the Matrix and the six combinations of the map, direct, partial, or contextual, and the sections without a primary mapping. Pinned to Matrix version 2.13.0.
@@ -23,7 +23,7 @@ It keeps the scenarios that apply to it, adds its own, and marks on its copy whe
 
 ## Versions
 
-Version 0.6, 26 October 2026, under review. Version 1.0 will follow the author's review of the scenarios and the exchange with Forscie. The mapping follows the Insider Threat Matrix™ version named in the map; a new version of the Matrix requires the coverage table to be reviewed.
+Version 1.0, 26 October 2026: the release shared with Forscie Limited for comments on the mapping, unlisted until the public announcement. Corrections that follow are released as later, dated versions. The mapping follows the Insider Threat Matrix™ version named in the map; a new version of the Matrix requires the coverage table to be reviewed.
 
 ## License and attribution
 
