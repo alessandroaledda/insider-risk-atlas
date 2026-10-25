@@ -1,4 +1,4 @@
-# Insider Threat Exposure Map (ITEM)
+# Insider Risk Atlas
 
 Insider risk scenarios classified by access population, act, and primary asset, with references to the [Insider Threat Matrix™](https://insiderthreatmatrix.org/).
 
@@ -13,7 +13,7 @@ Acts on a primary asset, six combinations: exfiltration of personal data; exfilt
 
 Access populations, eight: customer-facing; operations; technology; data and analytics; management; people functions; third parties; non-human identities.
 
-Every scenario has a stable identifier (ITEM-001 to ITEM-039) and is reached at `index.html#ITEM-nnn`.
+Every scenario has a stable identifier (ATLAS-001 to ATLAS-039) and is reached at `index.html#ATLAS-nnn`.
 
 Scope: acts by people and identities with legitimate access, including a colleague using another colleague's identity, where the act is theirs and the identity is the channel. An external attacker using a stolen identity is the work of security operations.
 
@@ -27,6 +27,6 @@ Version 1.0, 26 October 2026: the release shared with Forscie Limited for commen
 
 ## License and attribution
 
-Insider Threat Exposure Map (ITEM) © Alessandro Aledda, [CC BY 4.0](LICENSE). Insider Threat Matrix™ is a trademark of [Forscie Limited](https://forscie.com/); the framework is published under the Apache License 2.0. This map is an independent work and is not sponsored, endorsed by, or affiliated with Forscie Limited. See `NOTICE`.
+Insider Risk Atlas © Alessandro Aledda, [CC BY 4.0](LICENSE). Insider Threat Matrix™ is a trademark of [Forscie Limited](https://forscie.com/); the framework is published under the Apache License 2.0. This map is an independent work and is not sponsored, endorsed by, or affiliated with Forscie Limited. See `NOTICE`.
 
 Alessandro Aledda, Insider Risk Consultant, [alessandroaledda.com](https://alessandroaledda.com).

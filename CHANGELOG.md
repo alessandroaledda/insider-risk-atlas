@@ -2,7 +2,7 @@
 
 ## 1.0, 26 October 2026
 
-The release shared with Forscie Limited for comments on the mapping, unlisted until the public announcement. The content of 0.6, with ITEM-005, ITEM-015, and ITEM-031 reworded and the references reconciled with the Matrix repository at tag v2.13.0. The versions before 1.0 were internal iterations; from 1.0 the version that counts is the released one, and every correction is a later, dated version.
+Named Insider Risk Atlas before the first sharing: the name Insider Threat Exposure Map (ITEM) stood too close to Insider Threat Matrix (ITM) for a work that uses the Matrix as its reference; the identifiers take the prefix ATLAS (ATLAS-001 to ATLAS-039); the repository is insider-risk-atlas and the page is at /atlas/. The release shared with Forscie Limited for comments on the mapping, unlisted until the public announcement. The content of 0.6, with ITEM-005, ITEM-015, and ITEM-031 reworded and the references reconciled with the Matrix repository at tag v2.13.0. The versions before 1.0 were internal iterations; from 1.0 the version that counts is the released one, and every correction is a later, dated version.
 
 ## 0.6, 26 October 2026
 
