@@ -59,4 +59,4 @@ Insider Threat Matrix™ version 2.13.0. Of the Matrix's 45 Infringement section
 
 Means (AR2), motives (AR1), preparation (AR3), and anti-forensics (AR5) are recorded at scenario level and appear in scenario references; they are not part of the classification.
 
-Insider Threat Matrix™ is a trademark of Forscie Limited; the framework is published under the Apache License 2.0. This table is part of the Insider Risk Map, CC BY 4.0, Alessandro Aledda.
+Insider Threat Matrix™ is a trademark of [Forscie Limited](https://forscie.com/); the framework is published under the Apache License 2.0. This table is part of Insider Threat Exposure Map (ITEM™), CC BY 4.0, Alessandro Aledda.
