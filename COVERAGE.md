@@ -1,62 +1,62 @@
 # Infringement coverage
 
-Insider Threat Matrix™ version 2.13.0. Of the Matrix's 45 Infringement sections (AR4), 31 are assigned to an act and primary asset. The remaining 14 are excluded from the classification, with a recorded reason. Of the 31 assigned sections, 16 are cited by at least one scenario in this map version. An entry excluded from the classification may still appear in scenario references. IF019 and IF039 are cited as means. A new Matrix version requires a review of this table.
+This table records the relationship between the 45 Infringement sections (AR4) of Insider Threat Matrix™ version 2.13.0 and the six combinations of act and primary asset of Insider Threat Exposure Map (ITEM). A relationship is direct, partial, or contextual. A reference in a scenario does not establish that the whole Matrix section is represented. Section mappings and scenario citations are reported separately. 31 sections have a direct or partial mapping; 14 have no primary mapping. A new Matrix version requires a review of this table.
 
-## Assigned sections
+## Sections with direct or partial mappings
 
-| section | rows of the map | note |
+| section | status | combinations | note |
+|---|---|---|---|
+| IF001 Exfiltration via Web Service | direct | Exfiltration: personal data; Exfiltration: business information | Web-service transfer channel. The scenario assigns the affected data category and names the service. |
+| IF002 Exfiltration via Physical Medium | direct | Exfiltration: personal data; Exfiltration: business information | Physical-medium transfer channel. The scenario assigns the affected data category and names the medium. |
+| IF003 Exfiltration via Media Capture | direct | Exfiltration: personal data; Exfiltration: business information | Media-capture channel. The scenario assigns the affected data category; the capture creates an unauthorized copy or disclosure. |
+| IF004 Exfiltration via Other Network Medium | direct | Exfiltration: personal data; Exfiltration: business information | Other network-transfer channels. The scenario uses the subsection it supports; an API transfer does not establish a screen-sharing event, which IF024 describes. |
+| IF005 Exfiltration via Messaging Applications | direct | Exfiltration: personal data; Exfiltration: business information | Messaging-application transfer channel. The scenario assigns the affected data category and the application. |
+| IF006 Unauthorized Printing of Documents | direct | Exfiltration: personal data; Exfiltration: business information | Unauthorized printing. The scenario states why the printed copy exceeds the permitted handling boundary; printing within approved handling is not exfiltration. |
+| IF010 Exfiltration via Email | direct | Exfiltration: personal data; Exfiltration: business information | Email-transfer channel. The scenario uses the corporate-email or personal-email entry that matches the route. |
+| IF011 Providing Access to a Unauthorized Third Party | partial | Exfiltration: personal data; Exfiltration: business information; Disruption: systems and operations | Unauthorized third-party access may expose personal data or business information, or impair system security. The scenario assigns only the outcome it states; an access grant does not by itself establish exfiltration or disruption. |
+| IF013 Disruption of Business Operations | direct | Disruption: systems and operations | Operational disruption. The scenario assigns systems and operations where it states the interruption or impairment. |
+| IF014 Unauthorized Changes to IT Systems | partial | Disruption: systems and operations; Disruption: data integrity | System changes map to systems and operations where they impair service or system security, and to data integrity where their focal effect is the corruption of records or outputs. An unauthorized change alone does not establish every effect. |
+| IF015 Theft | partial | Fraud: money and physical assets | Theft of money or physical assets is represented through dishonest diversion. Theft of a data-bearing device also requires assessment of the data exposure; it does not establish exfiltration. |
+| IF016 Misappropriation of Funds | partial | Fraud: money and physical assets | Financial-diversion subcases map to fraud. Insider trading is not itself exfiltration; the disclosure of inside information is a separate action with its own reference and assessment. |
+| IF018 Sharing on AI Chatbot Platforms | direct | Exfiltration: personal data; Exfiltration: business information | Disclosure to an AI chatbot platform. The scenario assigns the affected data category and states the handling circumstances; the channel does not establish negligence. |
+| IF021 Harassment and Discrimination | partial | Misconduct towards people: personal data | Only the subcases involving unauthorized access to or use of personal data fit the people category of this version. Harassment or discrimination without that misuse is not represented by the six combinations. |
+| IF022 Data Loss | partial | Exfiltration: personal data; Exfiltration: business information; Disruption: systems and operations; Disruption: data integrity | Disclosure, destruction, or alteration is assigned according to the scenario's actual effect and data category. A credential leak is the disclosure of secrets; it does not by itself establish system disruption. |
+| IF024 Exfiltration via Screen Sharing | direct | Exfiltration: personal data; Exfiltration: business information | Unauthorized disclosure through screen sharing. The scenario assigns the affected data category. |
+| IF026 Denial of Service | direct | Disruption: systems and operations | Denial of service maps to systems and operations when the scenario states service impairment or interruption. |
+| IF027 Installing Malicious Software | partial | Exfiltration: personal data; Exfiltration: business information; Disruption: systems and operations; Disruption: data integrity | The malware's stated effect is classified: disclosure, disruption, or data alteration. Installation alone does not establish that effect. |
+| IF028 Delegated Execution via Artificial Intelligence Agents | partial | Exfiltration: personal data; Exfiltration: business information; Disruption: systems and operations; Disruption: data integrity; Fraud: money and physical assets; Misconduct towards people: personal data | Human delegation through an AI agent can contribute to any represented harmful outcome, including fraud and data-integrity impairment. The scenario identifies the human delegation and the applicable infringement; autonomous error is not assumed to be equivalent. |
+| IF029 Codebase Integrity Compromise | partial | Disruption: systems and operations; Disruption: data integrity; Exfiltration: personal data; Exfiltration: business information | Codebase compromise is classified by its stated effect on systems, data integrity, or disclosure. A harmful contribution is not automatically operational disruption. |
+| IF030 Exfiltration via SMS/MMS | direct | Exfiltration: personal data; Exfiltration: business information | Disclosure through short message service (SMS) or multimedia messaging service (MMS). The scenario assigns the affected data category. |
+| IF032 External Credential Sharing | partial | Exfiltration: business information | External credential sharing is the disclosure of secrets. Any subsequent unauthorized access or disruption is a separate action requiring scenario facts. |
+| IF033 Digital Defacement | partial | Disruption: systems and operations; Disruption: data integrity | Defacement maps to systems and operations where it impairs a service, or to data integrity where it corrupts organizational content. Reputational effects alone have no separate primary asset in this version. |
+| IF034 Exfiltration via Automated Transcription | direct | Exfiltration: personal data; Exfiltration: business information | Automated transcription can disclose personal data or business information. The scenario states the unauthorized recipient or processing destination. |
+| IF036 Misuse of Corporate Communication Channels | partial | Misconduct towards people: personal data | Only communications involving the represented misuse of personal data map to the people category of this version. Other abusive, threatening, or inappropriate communications are not fully represented. |
+| IF037 Physical Sabotage | direct | Disruption: systems and operations | Physical damage to equipment or infrastructure maps to systems and operations where it impairs operations. Any injury or safety effect requires separate assessment. |
+| IF040 Data Integrity Manipulation | direct | Disruption: data integrity | Manipulation of stored, transmitted, or presented data maps to data integrity when that is the focal harm. It may also support a fraud or other scenario whose primary assignment follows its principal outcome. |
+| IF042 Deliberate Safety Control Defeat | partial | Disruption: systems and operations | Defeat of an operational safety control can impair systems and operations. The asset set of this version does not separately represent physical injury or safety exposure. A disabled control is not an already-realized outage. |
+| IF043 Organizational Resource Diversion | partial | Fraud: money and physical assets; Disruption: systems and operations | Diversion of funds, inventory, or equipment may fit money and physical assets. Computing capacity, personnel time, and other resources require the scenario to state the resource and the operational effect; the asset set of this version does not represent all such diversion directly. |
+| IF044 Abuse of Decision-Making Authority | partial | Fraud: money and physical assets; Misconduct towards people: personal data; Disruption: systems and operations | Abuse of decision authority maps to financial diversion, personal-data misuse, or operational impairment only when that outcome is stated. Denial, suppression, or preference without a represented outcome remains a coverage gap. A negligent approval is not deliberate authority abuse. |
+| IF045 Unauthorized Data Access | partial | Misconduct towards people: personal data | Unauthorized access to customer or workforce data maps to the personal-data category. Access to business information without transfer is a gap of this version's model; exfiltration requires a disclosure or transfer. A later transfer is assessed separately. |
+
+## Sections without a primary mapping
+
+| section | status | note |
 |---|---|---|
-| IF001 Exfiltration via Web Service | Exfiltration: personal data; Exfiltration: business information | Channel: web services (cloud, repositories, collaboration, generative AI) |
-| IF002 Exfiltration via Physical Medium | Exfiltration: personal data; Exfiltration: business information | Channel: physical media |
-| IF003 Exfiltration via Media Capture | Exfiltration: personal data; Exfiltration: business information | Channel: photography, audio, and video capture |
-| IF004 Exfiltration via Other Network Medium | Exfiltration: personal data; Exfiltration: business information | Channel: other network media, including API and screen sharing |
-| IF005 Exfiltration via Messaging Applications | Exfiltration: personal data; Exfiltration: business information | Channel: messaging applications |
-| IF006 Unauthorized Printing of Documents | Exfiltration: personal data; Exfiltration: business information | Channel: printing |
-| IF010 Exfiltration via Email | Exfiltration: personal data; Exfiltration: business information | Channel: email, corporate or personal |
-| IF011 Providing Access to a Unauthorized Third Party | Sabotage: systems and operations; Exfiltration: business information | Weakening a control for a third party sits with sabotage; granting a third party access to a platform exposes what the platform holds, and sits with business information |
-| IF013 Disruption of Business Operations | Sabotage: systems and operations | The act of disruption itself |
-| IF014 Unauthorized Changes to IT Systems | Sabotage: systems and operations | Changes to systems, access controls, and cloud resources, deliberate or negligent |
-| IF015 Theft | Fraud: money and physical assets | Physical assets diverted; the data on a stolen device is an exfiltration scenario of its own |
-| IF016 Misappropriation of Funds | Fraud: money and physical assets; Exfiltration: business information | Funds misappropriated; IF016.004 Insider Trading sits with inside information |
-| IF018 Sharing on AI Chatbot Platforms | Exfiltration: personal data; Exfiltration: business information | Channel: AI chatbot platforms, often negligent |
-| IF021 Harassment and Discrimination | Misconduct towards people | Harm to a person through communications and conduct, where the organization's channels carry it |
-| IF022 Data Loss | Exfiltration: personal data; Exfiltration: business information; Sabotage: systems and operations | The loss itself, by kind of data: PII, PHI, and payment card data are personal; IP and media leaks are business information; a credential leak opens systems |
-| IF024 Exfiltration via Screen Sharing | Exfiltration: personal data; Exfiltration: business information | Channel: screen sharing |
-| IF026 Denial of Service | Sabotage: systems and operations | Disruption of availability |
-| IF027 Installing Malicious Software | Sabotage: systems and operations; Exfiltration: personal data | Destructive malware is sabotage; an infostealer is exfiltration |
-| IF028 Delegated Execution via Artificial Intelligence Agents | Exfiltration: personal data; Exfiltration: business information; Sabotage: systems and operations; Misconduct towards people | Cross-cutting: the non-human identities column, in every row it reaches |
-| IF029 Codebase Integrity Compromise | Sabotage: systems and operations | Integrity of code and pipelines |
-| IF030 Exfiltration via SMS/MMS | Exfiltration: personal data; Exfiltration: business information | Channel: SMS and MMS |
-| IF032 External Credential Sharing | Exfiltration: business information; Sabotage: systems and operations | Credentials given outside: what they open is the asset |
-| IF033 Digital Defacement | Sabotage: systems and operations | Integrity of public and internal surfaces |
-| IF034 Exfiltration via Automated Transcription | Exfiltration: personal data; Exfiltration: business information | Channel: automated transcription of meetings |
-| IF036 Misuse of Corporate Communication Channels | Misconduct towards people | Hostile or inappropriate communications towards people |
-| IF037 Physical Sabotage | Sabotage: systems and operations | Physical sabotage of equipment and infrastructure |
-| IF040 Data Integrity Manipulation | Sabotage: data integrity | The alteration of records, data in transit, or what a system presents |
-| IF042 Deliberate Safety Control Defeat | Sabotage: systems and operations | Safety controls defeated: operations and people at risk |
-| IF043 Organizational Resource Diversion | Fraud: money and physical assets | Resources, equipment, inventory, personnel, and working time diverted |
-| IF044 Abuse of Decision-Making Authority | Fraud: money and physical assets | Authority abused for approval, preference, or waiver |
-| IF045 Unauthorized Data Access | Misconduct towards people; Exfiltration: business information | Access without a business reason: to customer and workforce data it is misconduct; to organizational and third-party data it sits with business information, and a transfer that follows is assessed as its own event |
+| IF007 Unlawfully Accessing Copyrighted Material | outside | Copyright infringement without a represented disclosure, disruption, personal-data misuse, or financial-diversion outcome is outside this version's classification. Related actions may be referenced in a scenario. The exclusion does not state that copyright exposure cannot harm the organization. |
+| IF008 Inappropriate Web Browsing | outside | Acceptable-use browsing conduct is outside this version's primary classification. A related disclosure or harmful action is classified separately. The exclusion makes no determination on the lawfulness of monitoring. |
+| IF009 Installing Unapproved Software | contextual | Unapproved software installation is a supporting action where a represented harm is specified. Installation alone has no primary assignment in this version. |
+| IF012 Public Statements Resulting in Brand Damage | outside | Reputational harm from public statements has no primary asset category in this version. A statement that also discloses protected information is classified under that disclosure. |
+| IF017 Excessive Personal Use | outside | Excessive personal use without a represented diversion or other harmful outcome is outside this version's classification. Material resource diversion is assessed under IF043. |
+| IF019 Non-Corporate Device | contextual | A non-corporate device may be part of a scenario's handling or transfer route. Device status alone is not the primary harmful action. The entry remains an Infringement entry of the Matrix when a scenario cites it contextually. |
+| IF020 Unauthorized VPN Client | contextual | An unauthorized virtual private network (VPN) client may support a represented action. Client installation or use alone has no primary assignment in this version. |
+| IF023 Regulatory Non-Compliance | outside | Regulatory non-compliance without a represented harmful action has no primary assignment in this version. A scenario may still require a regulatory assessment with the relevant function. |
+| IF025 Internal Credential Sharing | contextual | Internal credential sharing may enable a represented action. The sharing and the action performed with the account are recorded separately; credential sharing alone has no primary assignment in this version. |
+| IF031 Unauthorized Presence in Restricted Physical Areas | outside | Unauthorized physical presence without a represented downstream act has no primary assignment in this version. Presence can itself expose sensitive assets; the exclusion is a limit of the model, not a statement that the behaviour is preparation. |
+| IF035 Unauthorized Work Location | outside | Unauthorized work location alone has no primary assignment in this version. A related data transfer, access violation, or operational harm is represented separately. |
+| IF038 Undisclosed Concurrent Employment | outside | Concurrent employment without a represented harmful action has no primary assignment in this version. Related disclosure, conflict-driven diversion, or misuse is represented in a scenario. |
+| IF039 Unauthorized Account Access | contextual | Unauthorized account access is recorded as a supporting action when a represented harm follows. Account access alone has no primary assignment in this version. Retained access is distinguished from authorization. |
+| IF041 Unauthorized Organizational Representation | outside | Unauthorized representation alone has no primary assignment in this version. A resulting dishonest financial diversion is classified as fraud; a contract or payment alone is insufficient. |
 
-## Excluded sections
+References may include motives (AR1), means (AR2), preparation (AR3), infringements (AR4), and anti-forensics (AR5) where the scenario supports them. Their role in an ITEM scenario does not change their classification in the Matrix.
 
-| section | why |
-|---|---|
-| IF007 Unlawfully Accessing Copyrighted Material | Conduct towards third parties' rights, not an act on the organization's assets; acceptable-use matter |
-| IF008 Inappropriate Web Browsing | Conduct; the monitoring of browsing content is restricted under European employment law and is not a program measure |
-| IF009 Installing Unapproved Software | Endpoint hygiene, handled by security operations; appears in scenarios as a means, not as the act |
-| IF012 Public Statements Resulting in Brand Damage | Communications and reputation; not an act on an information asset; the communications and Human Resources functions |
-| IF017 Excessive Personal Use | Conduct; a program measure here would have to pass the necessity and proportionality test that European employment and data protection law set for monitoring, and is unlikely to |
-| IF019 Non-Corporate Device | A means (the device), not an act; appears in scenarios as the channel |
-| IF020 Unauthorized VPN Client | A means; network hygiene, handled by security operations |
-| IF023 Regulatory Non-Compliance | Export, sanctions, and competition law: the trade compliance function's domain; an interface, not a program measure |
-| IF025 Internal Credential Sharing | A means: the colleague's identity as the channel; the act performed with it is classified under its own act and primary asset |
-| IF031 Unauthorized Presence in Restricted Physical Areas | Physical security's domain; a preparation for sabotage or theft, handled at the interface with corporate security |
-| IF035 Unauthorized Work Location | Conduct and compliance (tax, immigration, and data residency); location monitoring is restricted and is not a program measure |
-| IF038 Undisclosed Concurrent Employment | Conflict of interest and conduct; the HR and compliance functions |
-| IF039 Unauthorized Account Access | A means: access to another account, or to one's own after it should have been closed; the act performed with it is classified under its own act and primary asset |
-| IF041 Unauthorized Organizational Representation | Conduct and legal exposure; where a contract or payment follows, the scenario is classified under fraud |
-
-Means (AR2), motives (AR1), preparation (AR3), and anti-forensics (AR5) are recorded at scenario level and appear in scenario references; they are not part of the classification.
-
-Insider Threat Matrix™ is a trademark of [Forscie Limited](https://forscie.com/); the framework is published under the Apache License 2.0. This table is part of Insider Threat Exposure Map (ITEM™), CC BY 4.0, Alessandro Aledda.
+Insider Threat Matrix™ is a trademark of [Forscie Limited](https://forscie.com/); the framework is published under the Apache License 2.0. This table is part of Insider Threat Exposure Map (ITEM), CC BY 4.0, Alessandro Aledda.
