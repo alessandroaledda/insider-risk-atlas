@@ -97,7 +97,8 @@ h1{font-size:36px;line-height:1.14;margin:0 0 12px}
   .riskmap header{padding:48px 0 20px;margin-bottom:20px}
   .riskmap header h1{margin:0 0 12px;max-width:none;font-size:36px;line-height:1.14}
   .riskmap header .sub{max-width:none;margin:0 0 8px;font-size:18px;line-height:1.5;color:var(--ink)}
-  .riskmap header .instr{max-width:none;margin:0;font-size:16px;line-height:1.5;color:var(--ink)}
+  .riskmap header .instr{max-width:none;margin:0 0 6px;font-size:16px;line-height:1.5;color:var(--ink)}
+  .riskmap header .instr:last-child{margin-bottom:0}
   .riskmap .totals{display:flex;flex-wrap:wrap;gap:6px 16px;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:13px;line-height:1.5;color:var(--vr-muted);margin:0 0 20px}
   .riskmap .totals span{white-space:nowrap}
   .riskmap .selection-status{font-size:14px;line-height:1.5;margin:0 0 12px;color:var(--ink)}
@@ -182,6 +183,7 @@ h1{font-size:36px;line-height:1.14;margin:0 0 12px}
 <header>
 <h1 id="map-title"><span class="h1id">Atlas</span>Insider Risk Atlas</h1>
 <p class="sub">Insider risk scenarios classified by access population, act, and primary asset, with references to the <a href="https://insiderthreatmatrix.org/" target="_blank" rel="noopener">Insider Threat Matrix™</a>, owned by <a href="https://forscie.com/" target="_blank" rel="noopener">Forscie Limited</a>.</p>
+<p class="instr">Use the Atlas to identify scenarios relevant to your organization and assess the signals and controls each would require.</p>
 <p class="instr">Select an access population, act, or primary asset to find scenarios. Selections combine.</p>
 </header>
 <p class="totals"><span>Version 1.0.1</span><span>39 scenarios</span><span>22 deliberate</span><span>17 negligent</span><span>Insider Threat Matrix&trade; 2.13.0</span></p>
