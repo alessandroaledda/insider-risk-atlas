@@ -23,7 +23,7 @@ It keeps the scenarios that apply to it, adds its own, and marks on its copy whe
 
 ## Versions
 
-Version 1.0.2, 26 October 2026; published on 26 October 2026. Version 1.0, 25 October 2026, is the edition shared with Forscie Limited for comments on the mapping. Corrections are released as later, dated versions. The mapping follows the Insider Threat Matrix™ version named in the map; a new version of the Matrix requires the coverage table to be reviewed.
+Version 1.0.1, published on 26 October 2026. Version 1.0, 25 October 2026, is the edition shared with Forscie Limited for comments on the mapping. Corrections are released as later, dated versions. The mapping follows the Insider Threat Matrix™ version named in the map; a new version of the Matrix requires the coverage table to be reviewed.
 
 ## License and attribution
 
