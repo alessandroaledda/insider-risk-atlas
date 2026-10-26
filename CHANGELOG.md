@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2, 26 October 2026
+
+At Forscie Limited's request of 26 October 2026: the notice "Forscie® is a registered trademark of Forscie Limited." added to the page's notices, the standalone footer, the NOTICE, the README, and the coverage table; the two mentions of the company in scenario notes written in full as Forscie Limited. No change to the scenarios or the references.
+
 ## 1.0.1, 26 October 2026
 
 After Forscie Limited's reply of 26 October 2026, which pointed to the TRADEMARKS and NOTICE files of the Matrix repositories: the trademark notice in their wording ("Insider Threat Matrix™ is owned by Forscie Limited. Insider Threat Matrix is a trademark of Forscie Limited."), the copyright notice for Matrix content (Copyright © 2024–2026 Forscie Limited, Apache License, Version 2.0) and the statement that only identifiers and titles are reproduced, in the page, the standalone footer, the NOTICE, the README, and the coverage table; the subtitle says "owned by Forscie Limited" in place of "by Forscie". The dates of 0.6 and 1.0 corrected to 25 October 2026, the day they were built and the day 1.0 was sent; the files had said 26 October. No change to the scenarios or the references. Published on 26 October 2026: the repository public, the page at alessandroaledda.com/atlas/ indexed and linked from the site.
