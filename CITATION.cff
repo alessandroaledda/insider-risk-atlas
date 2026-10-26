@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use Insider Risk Atlas, please cite it as below, with the scenario identifier where applicable."
+title: "Insider Risk Atlas"
+abstract: "Insider risk scenarios classified by access population, act, and primary asset, with references to the Insider Threat Matrix, owned by Forscie Limited."
+type: dataset
+authors:
+  - family-names: Aledda
+    given-names: Alessandro
+    website: "https://alessandroaledda.com"
+version: "1.0.1"
+date-released: "2026-10-26"
+license: CC-BY-4.0
+url: "https://alessandroaledda.com/atlas/"
+repository-code: "https://github.com/alessandroaledda/insider-risk-atlas"
