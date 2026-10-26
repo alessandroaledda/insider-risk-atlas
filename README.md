@@ -1,6 +1,6 @@
 # Insider Risk Atlas
 
-Insider risk scenarios classified by access population, act, and primary asset, with references to the [Insider Threat Matrix™](https://insiderthreatmatrix.org/) by [Forscie](https://forscie.com/).
+Insider risk scenarios classified by access population, act, and primary asset, with references to the [Insider Threat Matrix™](https://insiderthreatmatrix.org/), owned by [Forscie Limited](https://forscie.com/).
 
 The Insider Threat Matrix™ describes what an insider does, entry by entry, from motive to anti-forensics. A program in a European organization has to answer two questions before it can choose its use cases and write its agreements: who, in this organization, has the access, and which asset the act reaches. The map draws every scenario as one line from the access population that could carry it, through the act, to the primary asset it reaches; a population, an act, or an asset selects its scenarios. Each scenario carries its signals, the chain of controls that answers it (prevent, detect, contain, respond), its Insider Threat Matrix™ references, and the reporting assessment for the affected assets under European law, with references to Insider Threat Event Requirements (ITER). The scenarios are illustrative.
 
@@ -23,10 +23,10 @@ It keeps the scenarios that apply to it, adds its own, and marks on its copy whe
 
 ## Versions
 
-Version 1.0, 26 October 2026: the release shared with Forscie Limited for comments on the mapping, unlisted until the public announcement. Corrections that follow are released as later, dated versions. The mapping follows the Insider Threat Matrix™ version named in the map; a new version of the Matrix requires the coverage table to be reviewed.
+Version 1.0.1, 26 October 2026. Version 1.0, 25 October 2026, is the edition shared with Forscie Limited for comments on the mapping; the page is unlisted until the public announcement. Corrections are released as later, dated versions. The mapping follows the Insider Threat Matrix™ version named in the map; a new version of the Matrix requires the coverage table to be reviewed.
 
 ## License and attribution
 
-Insider Risk Atlas © Alessandro Aledda, [CC BY 4.0](LICENSE). Insider Threat Matrix™ is a trademark of [Forscie Limited](https://forscie.com/); the framework is published under the Apache License 2.0. This map is an independent work and is not sponsored, endorsed by, or affiliated with Forscie Limited. See `NOTICE`.
+Insider Risk Atlas © Alessandro Aledda, [CC BY 4.0](LICENSE). Insider Threat Matrix™ is owned by [Forscie Limited](https://forscie.com/). Insider Threat Matrix is a trademark of Forscie Limited. Matrix content, Copyright © 2024–2026 Forscie Limited, is used under the Apache License, Version 2.0; only entry identifiers and titles are reproduced, as references. This map is an independent work and is not sponsored, endorsed by, or affiliated with Forscie Limited. See `NOTICE`.
 
 Alessandro Aledda, Insider Risk Consultant, [alessandroaledda.com](https://alessandroaledda.com).
