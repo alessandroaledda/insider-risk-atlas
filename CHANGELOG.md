@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2, 7 November 2026
+
+After the site review of 7 November 2026, with no change to the classification, the signals, the controls, or the Matrix references: every scenario carries a short title, and the sentence that stated it stands under the title as its description, on the card, in the results list, and on the route page. The detection and prevention counts decline their noun ("1 detection", "2 detections"). The card prose is set at the site's reading size. Noted on the reconciliation line: Matrix version 2.14.0 of 3 November 2026 retires MT006 into MT005.007 and MT004 into MT020; the references held here follow version 2.13.0 until the next reconciliation, and the MT006 reference of ATLAS-021 is kept as cited although it no longer resolves on the Matrix site.
+
 ## 1.0.1, 26 October 2026
 
 After Forscie Limited's reply of 26 October 2026, which pointed to the TRADEMARKS and NOTICE files of the Matrix repositories: the trademark notice in their wording ("Insider Threat Matrix™ is owned by Forscie Limited. Insider Threat Matrix is a trademark of Forscie Limited."), the copyright notice for Matrix content (Copyright © 2024–2026 Forscie Limited, Apache License, Version 2.0) and the statement that only identifiers and titles are reproduced, in the page, the standalone footer, the NOTICE, the README, and the coverage table; the subtitle says "owned by Forscie Limited" in place of "by Forscie". The dates of 0.6 and 1.0 corrected to 25 October 2026, the day they were built and the day 1.0 was sent; the files had said 26 October. Later the same day, at Forscie Limited's request, the notice "Forscie® is a registered trademark of Forscie Limited." added beside the Matrix notices, and the company named in full in two scenario notes. No change to the scenarios or the references. Published on 26 October 2026: the repository public, the page at alessandroaledda.com/atlas/ indexed and linked from the site.
