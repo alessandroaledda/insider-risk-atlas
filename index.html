@@ -120,16 +120,18 @@ h1{font-size:36px;line-height:1.14;margin:0 0 12px}
   .riskmap svg.flow .node:focus{outline:none}
   .riskmap svg.flow .node:focus-visible .hit{stroke:var(--ink);stroke-width:2;fill:transparent}
   .riskmap svg.flow .node.preview .lbl,.riskmap svg.flow .node.locked .lbl{text-decoration:underline;text-underline-offset:3px}
-  .riskmap svg.flow .node.locked .bar{stroke:var(--acc);stroke-width:2}
-  .riskmap svg.flow .node.selected-context .bar{stroke:var(--acc);stroke-width:2}
+  .riskmap svg.flow .node.locked .bar{stroke:var(--ink);stroke-width:2.5}
+  .riskmap svg.flow .node.selected-context .bar{stroke:var(--ink);stroke-width:2.5}
+  .riskmap svg.flow .node.preview .bar{stroke:var(--acc);stroke-width:2}
+  .riskmap svg.flow .node.preview .lbl{fill:var(--acc)}
   .riskmap svg.flow .pth{fill:none;stroke:var(--ink);stroke-opacity:.49;stroke-width:1.5;stroke-linecap:butt;vector-effect:non-scaling-stroke;transition:stroke .12s,stroke-opacity .12s;pointer-events:none}
   .riskmap svg.flow .pth.n{stroke-dasharray:5 4}
-  .riskmap svg.flow .pth.preview{stroke-opacity:.75;stroke-width:1.75}
+  .riskmap svg.flow .pth.preview{stroke:var(--acc);stroke-opacity:.9;stroke-width:1.75}
   .riskmap svg.flow .pth.dim{stroke-opacity:.12}
-  .riskmap svg.flow .pth.match{stroke:var(--acc);stroke-opacity:.9;stroke-width:1.75}
+  .riskmap svg.flow .pth.match{stroke:var(--ink);stroke-opacity:.85;stroke-width:1.75}
   .riskmap svg.flow .pth.other{stroke-opacity:.10}
   .riskmap svg.flow .pth.rest{stroke:var(--ink);stroke-opacity:.3;stroke-width:1.5}
-  .riskmap svg.flow .pth.selected{stroke:var(--acc);stroke-opacity:1;stroke-width:2.25}
+  .riskmap svg.flow .pth.selected{stroke:var(--ink);stroke-opacity:1;stroke-width:2.5}
   .riskmap .flow-key{display:flex;flex-wrap:wrap;gap:8px 24px;margin:12px 0 0;font-size:14px;line-height:1.5;color:var(--ink);max-width:none}
   .riskmap .flow-key span{display:inline-flex;align-items:center;gap:8px}
   .riskmap .flow-key i{display:inline-block;width:28px;height:0;border-top:1.5px solid var(--ink);opacity:.6}
@@ -246,7 +248,7 @@ h1{font-size:36px;line-height:1.14;margin:0 0 12px}
     paths.forEach(function(p){
       var s=byId[p.dataset.id]; p.classList.remove('preview','dim','match','other','rest','selected');
       if(selectedId){ if(s.id===selectedId) p.classList.add('selected'); else p.classList.add(active()&&matches(s,f)?'rest':'other'); }
-      else if(pv&&candActive){ p.classList.add(matches(s,cand)?'preview':'dim'); }
+      else if(pv&&candActive){ p.classList.add(matches(s,cand)?'preview':(active()&&matches(s,f)?'match':'dim')); }
       else if(active()){ p.classList.add(matches(s,f)?'match':'other'); }
     });
     if(selectedId){var sel=svg&&svg.querySelector('.pth[data-id="'+selectedId+'"]'); if(sel) sel.parentNode.appendChild(sel);}
